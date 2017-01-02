@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppBar, Checkbox, IconButton } from 'react-toolbox';
 import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
 import SidePanel from '../SidePanel';
+// import ViewCap from '../ViewCap';
 
 export default class SampleLayout extends Component {
 
@@ -14,6 +15,7 @@ export default class SampleLayout extends Component {
                 sidebarPinned: false
             }
         this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+        this.closeFunc = this.closeFunc.bind(this);
     }
 
     toggleDrawerActive = () => {
@@ -29,10 +31,7 @@ export default class SampleLayout extends Component {
         this.setState({ sidebarPinned: !this.state.sidebarPinned });
     }
 
-    // onSetSidebarOpen =  function(open) {
-    //     this.setState({drawerActive: open});
-    // }
-
+    // makes sidepanel responsive
   componentWillMount= ()=> {
     var mql = window.matchMedia(`(min-width: 800px)`);
     console.log("mql is ", mql)
@@ -53,13 +52,21 @@ export default class SampleLayout extends Component {
     this.setState({drawerPinned: this.state.mql.matches});
   }
 
+  closeFunc= ()=> {
+    console.log("clsing")
+    this.setState({
+        drawerPinned:false,
+        drawerActive: false
+    })
+  }
+
     render() {
         return (
             <Layout>
                 <NavDrawer active={this.state.drawerActive}
                     pinned={this.state.drawerPinned} permanentAt='xxxl'
                     onOverlayClick={ this.toggleDrawerActive }>
-                    <SidePanel/>
+                    <SidePanel closeFunc={this.closeFunc}/>
                 </NavDrawer>
                 <Panel>
                     <AppBar title="ViewCap Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
@@ -69,6 +76,7 @@ export default class SampleLayout extends Component {
                         <Checkbox label='Pin drawer' checked={this.state.drawerPinned} onChange={this.toggleDrawerPinned} />
                         <Checkbox label='Show sidebar' checked={this.state.sidebarPinned} onChange={this.toggleSidebar} />
                     </div>
+
                 </Panel>
                 <Sidebar pinned={ this.state.sidebarPinned } width={ 5 }>
                     <div><IconButton icon='close' onClick={ this.toggleSidebar }/></div>
