@@ -4,16 +4,23 @@ import PurpleAppBar from './PurpleAppBar.js';      // AppBar with simple overrid
 import SuccessButton from './SuccessButton.js';    // A button with complex overrides
 import { Button } from 'react-toolbox/lib/button'; // Bundled component import
 import { Checkbox } from 'react-toolbox/lib/checkbox'; // Bundled component import
+import SampleLayout from './components/Layout'
+// import Sidebar from 'react-sidebar';
+// import SidePanel from './components/SidePanel';
+import SampleAppBar from './components/sampleAppBar';
+/*
 
-const App = () => (
-  <div>
-    <PurpleAppBar />
-    <section style={{ padding: 20 }}>
-      <SuccessButton label='Success' primary raised />
-      <Button label='Primary Button' primary />
-      <Checkbox checked={true}/>
-    </section>
-  </div>
-);
 
-export default App;
+*/
+
+
+
+var App = React.createClass({
+  render: function(){
+    return (
+      <SampleLayout/>
+      );
+  }
+})
+
+module.exports = App;
