@@ -1,38 +1,11 @@
 {
-  "name": "react-toolbox-example",
-  "description": "A set of complementary tools to ReactJS.",
+  "name": "viewcap-demo",
+  "description": "A demo of viewcap using react-toolbox.",
   "version": "0.11.4",
   "author": {
-    "name": "React Toolbox Team",
-    "url": "http://github.com/react-toolbox"
+    "name": "AM",
+    "url": ""
   },
-  "contributors": [
-    {
-      "name": "Javi Jimenez Villar",
-      "email": "javi.jimenez.villar@gmail.com",
-      "url": "http://soyjavi.com/"
-    },
-    {
-      "name": "Javi Velasco Arjona",
-      "email": "javier.velasco86@gmail.com",
-      "url": "http://javivelasco.com/"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/react-toolbox/react-toolbox-example.git"
-  },
-  "bugs": {
-    "url": "https://github.com/react-toolbox/react-toolbox/issues",
-    "email": "issues@react-toolbox.com"
-  },
-  "keywords": [
-    "components",
-    "material design",
-    "react",
-    "react-component",
-    "toolbox"
-  ],
   "devDependencies": {
     "autoprefixer": "~6.4.0",
     "babel-core": "~6.13.2",
@@ -75,5 +48,11 @@
     "start": "node server"
   },
   "license": "MIT",
-  "homepage": "https://github.com/react-toolbox/react-toolbox-example#readme"
+  "homepage": "https://github.com/react-toolbox/react-toolbox-example#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
+  }
 }
