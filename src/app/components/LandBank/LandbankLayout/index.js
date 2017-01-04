@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { AppBar, Checkbox, IconButton } from 'react-toolbox';
 import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
-import SidePanel from '../SidePanel';
-import ViewCap from '../ViewCap';
+import LBSidePanel from '../LBSidePanel';
+// import ViewCap from '../ViewCap';
 
-export default class SampleLayout extends Component {
+export default class LandbankLayout extends Component {
 
     constructor(props) {
         super(props);
@@ -60,18 +60,34 @@ export default class SampleLayout extends Component {
     })
   }
 
+  pinFunc= ()=> {
+    console.log("pin")
+    this.setState({
+        drawerPinned:true,
+        drawerActive: false
+    })
+  }
+
     render() {
+        let style={
+            height:'400px'
+        }
         return (
             <Layout>
                 <NavDrawer active={this.state.drawerActive}
                     pinned={this.state.drawerPinned} permanentAt='xxxl'
                     onOverlayClick={ this.toggleDrawerActive }>
-                    <SidePanel closeFunc={this.closeFunc}/>
+                    <LBSidePanel closeFunc={this.closeFunc} pinFunc={this.pinFunc} pinned={this.state.drawerPinned}/>
                 </NavDrawer>
                 <Panel>
-                    <AppBar title="ViewCap Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
+                    {
+                        (this.state.drawerPinned) ? <AppBar title="Landbank Content"/>
+                        : <AppBar title="Landbank Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
+                    }
 
-                    <ViewCap/>
+                    <div style={style}>
+                        <p> some stuff here </p>
+                    </div>
 
                 </Panel>
                 <Sidebar pinned={ this.state.sidebarPinned } width={ 5 }>

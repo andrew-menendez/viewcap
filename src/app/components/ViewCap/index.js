@@ -48,16 +48,20 @@ export default class ViewCap extends Component {
   render() {
     const { className, ...props } = this.props;
     console.log(this.state);
-    return (
-      <div className={classnames('LandView', className)} {...props}>
-        <h1>
-          Viewcap Models
-        </h1>
-        {
-          (this.state.loggedIn) ? <ModelSelect/>
-          : <LogInForm logIn={this.logIn}/>
+    var style={
+          'min-height': '400px'
         }
-
+    return (
+      <div className={classnames('ViewCap', className)} {...props}>
+      <div className="dash" style={style}>
+          <h1>
+            Viewcap Models
+          </h1>
+          {
+            (this.state.loggedIn) ? <ModelSelect/>
+            : <LogInForm logIn={this.logIn}/>
+          }
+        </div>
       </div>
     );
   }

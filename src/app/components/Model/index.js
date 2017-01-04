@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
-
+import ModelCard from '../ModelCard'
 // import './style.css';
 
 export default class Model extends Component {
@@ -15,9 +15,14 @@ export default class Model extends Component {
 
   render() {
     const { className, modelobj } = this.props;
+    var style={
+      float:'left'
+    }
     return (
       <div className={classnames('Model', className)}>
-        <h2><Link to={this.getUrl(modelobj.loadPath)}>{modelobj.name}</Link></h2>
+        <div className="card-wrap" style={style}>
+          <ModelCard modelobj={modelobj}/>
+        </div>
       </div>
     );
   }
