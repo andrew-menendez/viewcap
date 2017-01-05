@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppBar, Checkbox, IconButton } from 'react-toolbox';
 import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
 import LBSidePanel from '../LBSidePanel';
+
 // import ViewCap from '../ViewCap';
 
 export default class LandbankLayout extends Component {
@@ -72,6 +73,7 @@ export default class LandbankLayout extends Component {
         let style={
             height:'400px'
         }
+
         return (
             <Layout>
                 <NavDrawer active={this.state.drawerActive}
@@ -81,7 +83,7 @@ export default class LandbankLayout extends Component {
                 </NavDrawer>
                 <Panel>
                     {
-                        (this.state.drawerPinned) ? <AppBar title="Landbank Content"/>
+                        (this.state.drawerPinned) ? <AppBar title="Landbank Content" rightIcon="dots-vertical"/>
                         : <AppBar title="Landbank Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
                     }
 

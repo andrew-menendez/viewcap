@@ -22,7 +22,7 @@ class ModelSelect extends Component {
 
   processResponse(response){
     let _this=this;
-    if(response.data.errors.length > 0){
+    if(response.data.errors && response.data.errors.length > 0){
       console.log("there was an errrrrror?")
       console.error(response.data.errors)
     } else {
@@ -30,24 +30,43 @@ class ModelSelect extends Component {
       _this.setState({
         models:response.data.modelInfo
       })
+      console.log(response.data.modelInfo)
+      localStorage.setItem('models', JSON.stringify(response.data.modelInfo));
     }
   }
 
   componentDidMount() {
     let _this=this;
         _this.setState({loading: true})
-        axios.get('api/models', {
-          params:{
-            user:'viewcap'
-          }
-        })
-        .then(function (response) {
-          _this.setState({loading: false})
-          _this.processResponse(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        console.log(_this.modelCheck());
+        if(_this.modelCheck()){
+
+          return
+        } else {
+            axios.get('api/models', {
+              params:{
+                user:'viewcap'
+              }
+          })
+          .then(function (response) {
+            _this.setState({loading: false})
+            _this.processResponse(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        }
+
+  }
+
+  modelCheck(){
+    let _models=JSON.parse(localStorage.getItem('models'));
+    console.log(_models);
+    if(_models){
+      this.setState({'models':_models})
+    }
+    return (_models) ? true : false;
+
   }
 
   render() {

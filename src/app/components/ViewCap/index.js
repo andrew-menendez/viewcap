@@ -22,14 +22,19 @@ export default class ViewCap extends Component {
     this.logIn = this.logIn.bind(this);
   }
 
+  componentDidMount(){
+    let loggedIn=JSON.parse(localStorage.getItem('loggedIn'));
+    console.log(loggedIn)
+    this.setState({loggedIn:loggedIn})
+  }
+
   setLogin(isLoggedIn){
     this.setState({loggedIn:isLoggedIn});
   }
 
   logIn(creds){
     let _this=this;
-    console.log(_this);
-    console.log(creds);
+
     axios.post('api/login', {
         domain:creds.domain,
         user: creds.user,
@@ -38,7 +43,9 @@ export default class ViewCap extends Component {
       .then(function(response) {
 
         _this.setLogin(true);
-        console.log(response);
+
+        console.log(_this.state);
+        localStorage.setItem('loggedIn', true);
       })
       .catch(function (error) {
         console.error(error);
@@ -48,6 +55,7 @@ export default class ViewCap extends Component {
   render() {
     const { className, ...props } = this.props;
     console.log(this.state);
+    const {loggedIn} = this.state;
     var style={
           'min-height': '400px'
         }
@@ -58,7 +66,7 @@ export default class ViewCap extends Component {
             Viewcap Models
           </h1>
           {
-            (this.state.loggedIn) ? <ModelSelect/>
+            (loggedIn) ? <ModelSelect/>
             : <LogInForm logIn={this.logIn}/>
           }
         </div>
