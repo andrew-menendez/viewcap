@@ -23,7 +23,7 @@ export default class ViewCap extends Component {
   }
 
   componentDidMount(){
-    let loggedIn=JSON.parse(localStorage.getItem('loggedIn'));
+    let loggedIn=JSON.parse(sessionStorage.getItem('loggedIn'));
     console.log(loggedIn)
     this.setState({loggedIn:loggedIn})
   }
@@ -45,7 +45,7 @@ export default class ViewCap extends Component {
         _this.setLogin(true);
 
         console.log(_this.state);
-        localStorage.setItem('loggedIn', true);
+        sessionStorage.setItem('loggedIn', true);
       })
       .catch(function (error) {
         console.error(error);
@@ -57,7 +57,7 @@ export default class ViewCap extends Component {
     console.log(this.state);
     const {loggedIn} = this.state;
     var style={
-          'min-height': '400px'
+          'minHeight': '400px'
         }
     return (
       <div className={classnames('ViewCap', className)} {...props}>
@@ -66,7 +66,7 @@ export default class ViewCap extends Component {
             Viewcap Models
           </h1>
           {
-            (loggedIn) ? <ModelSelect/>
+            (loggedIn) ? <ModelSelect user="viewcap"/>
             : <LogInForm logIn={this.logIn}/>
           }
         </div>

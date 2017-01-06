@@ -16,6 +16,7 @@ class ModelSelect extends Component {
             loading:false,
             models: []
         }
+      this.key= this.props.user + '_models';
 
       this.processResponse = this.processResponse.bind(this);
     }
@@ -31,7 +32,7 @@ class ModelSelect extends Component {
         models:response.data.modelInfo
       })
       console.log(response.data.modelInfo)
-      localStorage.setItem('models', JSON.stringify(response.data.modelInfo));
+      localStorage.setItem(this.key, JSON.stringify(response.data.modelInfo));
     }
   }
 
@@ -45,7 +46,7 @@ class ModelSelect extends Component {
         } else {
             axios.get('api/models', {
               params:{
-                user:'viewcap'
+                user:this.props.user
               }
           })
           .then(function (response) {
@@ -60,10 +61,11 @@ class ModelSelect extends Component {
   }
 
   modelCheck(){
-    let _models=JSON.parse(localStorage.getItem('models'));
+    let _models=JSON.parse(localStorage.getItem(this.key));
     console.log(_models);
+
     if(_models){
-      this.setState({'models':_models})
+      this.setState({models:_models})
     }
     return (_models) ? true : false;
 
@@ -83,5 +85,9 @@ class ModelSelect extends Component {
     );
   }
 }
+
+ModelSelect.propTypes={
+    user:PropTypes.string.isRequired
+  };
 
 export default ModelSelect;
