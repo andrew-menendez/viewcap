@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import {Col} from 'react-flexbox-grid/lib';
+import {Button} from 'react-toolbox/lib/button';
 // import './style.css';
 
 export default class FakeWidget extends Component {
@@ -27,9 +28,9 @@ export default class FakeWidget extends Component {
 
     return widgeObj[type]
   }
-
+  //
   render() {
-    const { className, widget } = this.props;
+    const { className, widget, remove } = this.props;
     var style={
       height:'300px',
       width:'200px',
@@ -42,6 +43,7 @@ export default class FakeWidget extends Component {
         <Col xs>
           <div style={style}>
             <h3>{widget.title}</h3>
+            <Button onClick={remove}>X</Button>
             {this.widgetServer(widget.type)}
           </div>
         </Col>

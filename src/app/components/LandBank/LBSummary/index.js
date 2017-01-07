@@ -9,7 +9,6 @@ export default class LBSummary extends Component {
   // state = {}
     constructor(props) {
         super(props);
-
         this.state = {
                 activeTab: 'summary',
                 widgets: [
@@ -23,31 +22,33 @@ export default class LBSummary extends Component {
                     }
                   ]
                 }
-
+      this.removeWidget=this.removeWidget.bind(this)
     }
 
-    /*
-    {widgets.map((widget,i)=>{
-                  <Col xs key={i}>
-                    <p>{widget.title}</p>
-                    {widget.asset}
-                  </Col>
-               })
-            }
-    */
+  removeWidget=()=> {
+    //need to use some filter method
+    let _widgets=this.state.widgets;
+    console.log(_widgets);
+    if(_widgets.length){
+      _widgets.pop();
+    }
+
+    this.setState({widgets:_widgets})
+  }
+  //
+  //
 
   render() {
     const { className } = this.props;
     const { widgets } = this.state;
-    // var style={
-    //   float:'left'
-    // }
+    const removeWidget = this.removeWidget;
+
     return (
       <div className={classnames('LBSummary', className)}>
         <Grid fluid>
           <Row around="xs">
 
-              {(widgets) ? widgets.map((widget,i)=>  <FakeWidget key={i} widget={widget}/>)
+              {(widgets) ? widgets.map((widget,i)=> <FakeWidget key={i} widget={widget} remove={removeWidget} /> )
                     : <span>no widgets found</span>
                   }
 
