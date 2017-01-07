@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppBar, Checkbox, IconButton } from 'react-toolbox';
 import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
 import LBSidePanel from '../LBSidePanel';
-
+import LBSummary from '../LBSummary';
 // import ViewCap from '../ViewCap';
 
 export default class LandbankLayout extends Component {
@@ -81,7 +81,7 @@ export default class LandbankLayout extends Component {
   tabControl = () => {
 
     const tabObj= {
-        'summary':<p> some summary here </p>,
+        'summary':<LBSummary/>,
         'jpp':<p> other jpp here </p>,
         'simple_residual':<p> simple_residual </p>,
         'quarterly':<p> quarterly </p>,
@@ -108,14 +108,16 @@ export default class LandbankLayout extends Component {
                                 activeTab={this.state.activeTab}
                                 />
                 </NavDrawer>
-                <Panel>
-                    {
-                        (this.state.drawerPinned) ? <AppBar title="Landbank Content" rightIcon="dots-vertical"/>
-                        : <AppBar title="Landbank Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
-                    }
+                <Panel style={{overflowX:'auto'}}>
 
-                    <div style={style}>
-                        {this.tabControl()}
+                        {
+                            (this.state.drawerPinned) ? <AppBar title="Landbank Content" rightIcon="dots-vertical"/>
+                            : <AppBar title="Landbank Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
+                        }
+                    <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
+                        <div style={style}>
+                            {this.tabControl()}
+                        </div>
                     </div>
 
                 </Panel>
