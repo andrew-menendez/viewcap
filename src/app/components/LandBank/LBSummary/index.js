@@ -13,10 +13,12 @@ export default class LBSummary extends Component {
                 activeTab: 'summary',
                 widgets: [
                     {
+                      id:1,
                       type: 'type1',
                       title: 'Fake 1'
                     },
                     {
+                      id:2,
                       type: 'type2',
                       title: 'Fake 2'
                     }
@@ -25,12 +27,12 @@ export default class LBSummary extends Component {
       this.removeWidget=this.removeWidget.bind(this)
     }
 
-  removeWidget=()=> {
+  removeWidget=(id)=> {
     //need to use some filter method
     let _widgets=this.state.widgets;
     console.log(_widgets);
     if(_widgets.length){
-      _widgets.pop();
+      _widgets = _widgets.filter(widget=> widget.id != id)
     }
 
     this.setState({widgets:_widgets})

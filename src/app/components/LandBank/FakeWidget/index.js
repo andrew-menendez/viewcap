@@ -43,7 +43,7 @@ export default class FakeWidget extends Component {
         <Col xs>
           <div style={style}>
             <h3>{widget.title}</h3>
-            <Button onClick={remove}>X</Button>
+            <Button onClick={()=>remove(widget.id)}>X</Button>
             {this.widgetServer(widget.type)}
           </div>
         </Col>
