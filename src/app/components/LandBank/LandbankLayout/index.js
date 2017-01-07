@@ -13,10 +13,13 @@ export default class LandbankLayout extends Component {
         this.state = {
                 drawerActive: false,
                 drawerPinned: true,
-                sidebarPinned: false
+                sidebarPinned: false,
+                activeTab: 'summary'
             }
         this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
         this.closeFunc = this.closeFunc.bind(this);
+        this.tabControl = this.tabControl.bind(this);
+        this.tabSet = this.tabSet.bind(this);
     }
 
     toggleDrawerActive = () => {
@@ -69,6 +72,25 @@ export default class LandbankLayout extends Component {
     })
   }
 
+  tabSet=(tab)=>{
+    this.setState({
+        activeTab:tab
+    })
+  }
+
+  tabControl = () => {
+
+    const tabObj= {
+        'summary':<p> some summary here </p>,
+        'jpp':<p> other jpp here </p>,
+        'simple_residual':<p> simple_residual </p>,
+        'quarterly':<p> quarterly </p>,
+        'monthly':<p> monthly </p>,
+    }
+
+    return tabObj[this.state.activeTab]
+  }
+
     render() {
         let style={
             height:'400px'
@@ -79,7 +101,12 @@ export default class LandbankLayout extends Component {
                 <NavDrawer active={this.state.drawerActive}
                     pinned={this.state.drawerPinned} permanentAt='xxxl'
                     onOverlayClick={ this.toggleDrawerActive }>
-                    <LBSidePanel closeFunc={this.closeFunc} pinFunc={this.pinFunc} pinned={this.state.drawerPinned}/>
+                    <LBSidePanel closeFunc={this.closeFunc}
+                                pinFunc={this.pinFunc}
+                                pinned={this.state.drawerPinned}
+                                tabSet={this.tabSet}
+                                activeTab={this.state.activeTab}
+                                />
                 </NavDrawer>
                 <Panel>
                     {
@@ -88,7 +115,7 @@ export default class LandbankLayout extends Component {
                     }
 
                     <div style={style}>
-                        <p> some stuff here </p>
+                        {this.tabControl()}
                     </div>
 
                 </Panel>

@@ -2,6 +2,10 @@ import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import axios from 'axios';
 import Model from '../Model';
+import {Button} from 'react-toolbox/lib/button';
+import RefeshIcon from 'react-icons/lib/md/cached';
+//react-icons/lib/md/cached
+
 // import './style.css';
 
 
@@ -19,6 +23,8 @@ class ModelSelect extends Component {
       this.key= this.props.user + '_models';
 
       this.processResponse = this.processResponse.bind(this);
+      this.getModels = this.getModels.bind(this);
+
     }
 
   processResponse(response){
@@ -32,19 +38,27 @@ class ModelSelect extends Component {
         models:response.data.modelInfo
       })
       console.log(response.data.modelInfo)
-      localStorage.setItem(this.key, JSON.stringify(response.data.modelInfo));
+      if(response.data.modelInfo){
+        localStorage.setItem(this.key, JSON.stringify(response.data.modelInfo));
+      }
     }
   }
 
   componentDidMount() {
-    let _this=this;
-        _this.setState({loading: true})
-        console.log(_this.modelCheck());
-        if(_this.modelCheck()){
-
+    // let _this=this;
+        this.setState({loading: true})
+        console.log(this.modelCheck());
+        if(this.modelCheck()){
           return
         } else {
-            axios.get('api/models', {
+          this.getModels();
+        }
+
+  }
+
+  getModels(){
+    let _this=this;
+    return axios.get('api/models', {
               params:{
                 user:this.props.user
               }
@@ -56,8 +70,6 @@ class ModelSelect extends Component {
           .catch(function (error) {
             console.log(error);
           });
-        }
-
   }
 
   modelCheck(){
@@ -77,6 +89,7 @@ class ModelSelect extends Component {
 
     return (
       <div className={classnames('ModelSelect', className)} >
+      <Button icon={<RefeshIcon/>} onClick={this.getModels}> refresh model list </Button>
         {(models) ? models.map((model,i)=> <Model key={i} modelobj={model}/>)
           : <span>no models found</span>
         }

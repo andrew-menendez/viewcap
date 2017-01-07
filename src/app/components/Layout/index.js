@@ -24,7 +24,7 @@ export default class SampleLayout extends Component {
 
     toggleDrawerPinned = () => {
         this.setState({ drawerPinned: !this.state.drawerPinned });
-        console.log(this.state)
+
     }
 
     toggleSidebar = () => {
@@ -34,12 +34,11 @@ export default class SampleLayout extends Component {
     // makes sidepanel responsive
   componentWillMount= ()=> {
     var mql = window.matchMedia(`(min-width: 800px)`);
-    console.log("mql is ", mql)
-    console.log(this.state)
+
     this.setState({mql: mql, drawerPinned: mql.matches});
     // mql.addListener(this.mediaQueryChanged());
     mql.onchange=this.mediaQueryChanged;
-    console.log(this.state);
+
   }
 
   componentWillUnmount= () => {
@@ -47,13 +46,13 @@ export default class SampleLayout extends Component {
   }
 
   mediaQueryChanged= ()=> {
-    console.log("call me baby");
+
     console.log(this.state)
     this.setState({drawerPinned: this.state.mql.matches});
   }
 
   closeFunc= ()=> {
-    console.log("clsing")
+
     this.setState({
         drawerPinned:false,
         drawerActive: false
