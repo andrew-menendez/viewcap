@@ -7,16 +7,38 @@ export default class LBSummary extends Component {
   // static propTypes = {}
   // static defaultProps = {}
   // state = {}
+    constructor(props) {
+        super(props);
 
+        this.state = {
+                activeTab: 'summary',
+                widgets: [
+                    {
+                      type: 'type1',
+                      title: 'Fake 1'
+                    },
+                    {
+                      type: 'type2',
+                      title: 'Fake 2'
+                    }
+                  ]
+                }
 
+    }
 
-  /*
+    /*
+    {widgets.map((widget,i)=>{
+                  <Col xs key={i}>
+                    <p>{widget.title}</p>
+                    {widget.asset}
+                  </Col>
+               })
+            }
+    */
 
-  */
-
-//<Dashboard  widgets={this.state.widgets} layout={this.state.layout}  />
   render() {
-    const { className, modelobj } = this.props;
+    const { className } = this.props;
+    const { widgets } = this.state;
     // var style={
     //   float:'left'
     // }
@@ -24,9 +46,11 @@ export default class LBSummary extends Component {
       <div className={classnames('LBSummary', className)}>
         <Grid fluid>
           <Row around="xs">
-            <Col xs={4} ><FakeWidget/> </Col>
-            <Col xs={4} ><FakeWidget/> </Col>
-            <Col xs={4} ><FakeWidget/> </Col>
+
+              {(widgets) ? widgets.map((widget,i)=>  <FakeWidget key={i} widget={widget}/>)
+                    : <span>no widgets found</span>
+                  }
+
           </Row>
         </Grid>
       </div>

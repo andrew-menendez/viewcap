@@ -93,7 +93,7 @@ export default class LandbankLayout extends Component {
 
     render() {
         let style={
-            height:'400px'
+            minHeight:'400px'
         }
 
         return (
@@ -108,11 +108,11 @@ export default class LandbankLayout extends Component {
                                 activeTab={this.state.activeTab}
                                 />
                 </NavDrawer>
-                <Panel style={{overflowX:'auto'}}>
+                <Panel>
 
                         {
-                            (this.state.drawerPinned) ? <AppBar title="Landbank Content" rightIcon="dots-vertical"/>
-                            : <AppBar title="Landbank Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
+                            (this.state.drawerPinned) ? <AppBar title="Landbank Content" rightIcon='more_vert' onRightIconClick={ this.toggleSidebar }/>
+                            : <AppBar title="Landbank Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } rightIcon='more_vert' onRightIconClick={ this.toggleSidebar } />
                         }
                     <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
                         <div style={style}>
