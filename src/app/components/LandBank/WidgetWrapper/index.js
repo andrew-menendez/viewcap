@@ -2,9 +2,10 @@ import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import {Col} from 'react-flexbox-grid/lib';
 import {Button} from 'react-toolbox/lib/button';
+import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 // import './style.css';
 
-export default class FakeWidget extends Component {
+export default class WidgetWrapper extends Component {
   // static propTypes = {}
   // static defaultProps = {}
   // state = {}
@@ -32,20 +33,26 @@ export default class FakeWidget extends Component {
   render() {
     const { className, widget, remove } = this.props;
     var style={
-      height:'300px',
-      width:'200px',
+      minHeight:'300px',
+      minWidth:'200px',
       margin:'10px',
-      'backgroundColor':'aqua',
-      'borderRadius':'10px'
+      'borderRadius':'10px',
+      borderColor:'black'
     }
     return (
-      <div className={classnames('FakeWidget', className)}>
+      <div className={classnames('WidgetWrapper', className)}>
         <Col xs>
-          <div style={style}>
-            <h3>{widget.title}</h3>
-            <Button onClick={()=>remove(widget.id)}>X</Button>
+          <Card style={style}>
+
+          <CardTitle title={widget.title} subtitle="Subtitle here"/>
+
+          <div style={widget.style}>
             {this.widgetServer(widget.type)}
           </div>
+          <CardActions>
+            <Button label="close" icon="close" onClick={()=>remove(widget.id)} />
+          </CardActions>
+          </Card>
         </Col>
       </div>
     );

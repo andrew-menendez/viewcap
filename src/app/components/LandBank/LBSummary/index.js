@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
-import FakeWidget from '../FakeWidget';
+import WidgetWrapper from '../WidgetWrapper';
 import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 
 export default class LBSummary extends Component {
@@ -15,12 +15,14 @@ export default class LBSummary extends Component {
                     {
                       id:1,
                       type: 'type1',
-                      title: 'Fake 1'
+                      title: 'Fake 1',
+                      style:{'width':'500px'}
                     },
                     {
                       id:2,
                       type: 'type2',
-                      title: 'Fake 2'
+                      title: 'Fake 2',
+                      style:{'width':'200px'}
                     }
                   ]
                 }
@@ -50,7 +52,7 @@ export default class LBSummary extends Component {
         <Grid fluid>
           <Row around="xs">
 
-              {(widgets) ? widgets.map((widget,i)=> <FakeWidget key={i} widget={widget} remove={removeWidget} /> )
+              {(widgets) ? widgets.map((widget,i)=> <WidgetWrapper key={i} widget={widget} remove={removeWidget} /> )
                     : <span>no widgets found</span>
                   }
 

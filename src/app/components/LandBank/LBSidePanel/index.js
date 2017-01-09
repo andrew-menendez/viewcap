@@ -31,6 +31,10 @@ export default class SidePanel extends Component {
             icon={<FaLineChart/>}
             onClick={ () => tabSet('jpp')}
             active={(activeTab==='jpp') ? true : false }/>
+      <Link label='Comparables'
+            icon={<FaTable/>}
+            onClick={ () => tabSet('comparables')}
+            active={(activeTab==='comparables') ? true : false }/>
       <Link label='Simple Residual'
             icon='inbox'
             onClick={ () => tabSet('simple_residual')}

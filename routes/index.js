@@ -8,6 +8,7 @@ module.exports = router;
 
 router.use('/login', require('./login').router);
 router.use('/models', require('./models'));
+router.use('/data', require('./data'));
 
 // Make sure this is after all of
 // the registered routes!

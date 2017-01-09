@@ -3,6 +3,7 @@ import { AppBar, Checkbox, IconButton } from 'react-toolbox';
 import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
 import LBSidePanel from '../LBSidePanel';
 import LBSummary from '../LBSummary';
+import Comparables from '../Comparables';
 // import ViewCap from '../ViewCap';
 
 export default class LandbankLayout extends Component {
@@ -83,10 +84,11 @@ export default class LandbankLayout extends Component {
     const tabObj= {
         'summary':<LBSummary/>,
         'jpp':<p> other jpp here </p>,
+        'comparables':<Comparables/>,
         'simple_residual':<p> simple_residual </p>,
         'quarterly':<p> quarterly </p>,
-        'monthly':<p> monthly </p>,
-    }
+        'monthly':<p> monthly </p>
+        }
 
     return tabObj[this.state.activeTab]
   }
