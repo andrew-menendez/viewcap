@@ -79,16 +79,6 @@ router.post('/', function(req, res) {
         console.log(j);
         console.log(response)
         res.send(response)
-      // return login(domain,user,pass)
-      //         .then(function(res){
-      //           console.log(res)
-      //           res.send(res);
-      //         })
-      //         .catch(err=>{
-      //           console.log('error')
-      //           console.log(err)
-      //           res.send(err);
-      //         })
     })
 });
 

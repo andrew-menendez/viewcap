@@ -29,30 +29,9 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel',
         query: { presets: ['es2015', 'stage-0', 'react'] }
-      },
-      {
+      }, {
         test: /(\.scss|\.css)$/,
-        include:[
-          path.resolve(__dirname, './node_modules/react-toolbox'),
-          path.resolve(__dirname, './node_modules/react-flexbox-grid')
-        ],
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap')
-      },
-      {
-        test: /\.scss$/,
-        exclude: [
-          path.resolve(__dirname, './node_modules/react-toolbox'),
-          path.resolve(__dirname, './node_modules/react-flexbox-grid')
-        ],
-        loader:"style-loader!css-loader!autoprefixer-loader!sass-loader",
-      },
-      {
-        test: /\.css$/,
-        exclude:[
-          path.resolve(__dirname, './node_modules/react-toolbox'),
-          path.resolve(__dirname, './node_modules/react-flexbox-grid')
-        ],
-        loader:"style-loader!css-loader!autoprefixer-loader",
       }
     ]
   },

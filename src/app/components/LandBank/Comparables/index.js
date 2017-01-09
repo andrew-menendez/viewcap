@@ -4,6 +4,10 @@ import axios from 'axios'
 import classnames from 'classnames';
 
 
+
+import theme from './react-table.scss';
+
+
 export default class Comparables extends Component {
   // static propTypes = {}
   // static defaultProps = {}
@@ -53,7 +57,7 @@ export default class Comparables extends Component {
     const { className } = this.props;
     const { data, loading } = this.state;
     const columns = [
-    {id: 'builder', accessor:d => d.builder},
+    {header: 'builder', accessor:'builder'},
     {header:'area', accessor:'area'},
     {header:'averageSales', accessor:'averageSales'},
     {header:'closedToDate', accessor:'closedToDate'},
@@ -67,7 +71,7 @@ export default class Comparables extends Component {
 
     return (
       <div className={classnames('Comparables', className)}>
-        <p>loading: {loading}</p>
+        <p className="hello">loading: {loading}</p>
 
 
           <ReactTable
@@ -78,6 +82,7 @@ export default class Comparables extends Component {
             loading={loading} // Display the loading overlay when we need it
             //onChange={this.fetchData} // Request new data when things change
             pageSize={25}
+            style={theme}
           />
       </div>
     );

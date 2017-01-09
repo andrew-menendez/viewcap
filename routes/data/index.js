@@ -33,7 +33,7 @@ router.get('/', function(req,res){
   console.log(rp.defaults.jar)
   rp(options)
     .then(function(response) {
-      console.log(response);
+      //console.log(response);
       res.send(response);
     })
     .catch(function(err) {
