@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import WidgetWrapper from '../WidgetWrapper';
 import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 
-
+import style from './flexboxgrid.css';
 
 export default class LBSummary extends Component {
   // static propTypes = {}
@@ -50,7 +50,7 @@ export default class LBSummary extends Component {
     const removeWidget = this.removeWidget;
 
     return (
-      <div className={classnames('LBSummary', className)}>
+      <div className={classnames('LBSummary', className)} style={style}>
         <Grid fluid>
           <Row around="xs">
 
