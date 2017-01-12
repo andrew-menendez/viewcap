@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import axios from 'axios';
 
-import { LogInForm } from '../LogInForm';
+import LogInForm from '../LogInForm';
 import ModelSelect from '../ModelSelect';
 
 
@@ -29,7 +29,9 @@ export default class ViewCap extends Component {
   }
 
   setLogin(isLoggedIn){
+    console.log('setting state to true')
     this.setState({loggedIn:isLoggedIn});
+    console.log(this.state)
   }
 
   logIn(creds){
@@ -62,9 +64,7 @@ export default class ViewCap extends Component {
     return (
       <div className={classnames('ViewCap', className)} {...props}>
       <div className="dash" style={style}>
-          <h1>
-            Viewcap Models
-          </h1>
+
           {
             (loggedIn) ? <ModelSelect user="viewcap"/>
             : <LogInForm logIn={this.logIn}/>

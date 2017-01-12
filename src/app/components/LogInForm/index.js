@@ -1,50 +1,70 @@
 import React, { PropTypes, Component } from 'react';
+import Input from 'react-toolbox/lib/input';
+import {Button} from 'react-toolbox/lib/button';
+import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 import classnames from 'classnames';
 
 // import './style.css';
 
-export const LogInForm = ({domain,user,pass,logIn}) => {
+export default class  LogInForm extends Component {
 
-  let _domain, _user, _pass ;
+  //let _domain, _user, _pass ;
+  constructor(props) {
+    super(props);
+    this.state = {
+      domain: 'app',
+      user:'',
+      pass:''
+    };
 
-  function handleSubmit(event) {
-
-    event.preventDefault();
-    logIn({
-      domain:_domain.value,
-      user:_user.value,
-      pass:_pass.value
-    })
+    this.handleChange = this.handleChange.bind(this);
 
   }
 
+  // handleChange(field,event) {
+  //     var nextState = {}
+  //     nextState[field] = event.target.value
+  //     this.setState(nextState)
+  // }
+  handleChange = (name, value) => {
+    this.setState({...this.state, [name]: value});
+  };
+
+  render(){
+  const { className, logIn } = this.props;
+
   return (
+    <Grid>
+      <Row center="xs">
+        <Col xs={8}>
+        <form onSubmit={() =>logIn({
+                                    domain:this.state.domain,
+                                    user:this.state.user,
+                                    pass:this.state.pass
+                                  })}
+              className="log-in-form">
+        <h4>Please authenticate with your ModelShop credentials</h4>
+          <section>
 
-      <form onSubmit={handleSubmit} className="log-in-form">
-      <h4>Please authenticate with your ModelShop credentials</h4>
-        <label htmlFor="domain">ModelShop Domain </label>
-        <input id="domain" type="text" required defaultValue={domain} ref={input => _domain = input}/>
+            <Input label='ModelShop Domain' name='domain' type="text" required  value={this.state.domain} onChange={this.handleChange.bind(this,'domain')}/>
 
-        <label htmlFor="user">Username </label>
-        <input id="user" type="text" required defaultValue={user} ref={input => _user = input}/>
 
-        <label htmlFor="pass">Password </label>
-        <input id="pass" type="text" required defaultValue={pass} ref={input => _pass = input}/>
+            <Input label="Username" name="user" type="text" required  value={this.state.user} onChange={this.handleChange.bind(this,'user')}/>
 
-      <button>Log in</button>
-      </form>
-    )
+
+            <Input label="Password" name="pass" type="text" required  value={this.state.pass} onChange={this.handleChange.bind(this,'pass')}/>
+        </section>
+        <Button onClick={() =>logIn({
+                                    domain:this.state.domain,
+                                    user:this.state.user,
+                                    pass:this.state.pass
+                                  })}>Log in</Button>
+        </form>
+      </Col>
+      </Row>
+    </Grid>
+    );
+  }
+
 }
 
-LogInForm.defaultProps = {
-  domain: "app",
-  user: "viewcap",
-  pass: "",
-
-}
-
-LogInForm.propTypes = {
-  domain: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired,
-  pass: PropTypes.string.isRequired
-}
