@@ -5,9 +5,14 @@ import LBSidePanel from '../LBSidePanel';
 import LBSummary from '../LBSummary';
 import Comparables from '../Comparables';
 // import ViewCap from '../ViewCap';
+//all sidepanel things...
 import axios from 'axios';
 import MiniLogInForm from '../MiniLogInForm';
 import { Button } from 'react-toolbox/lib/button';
+import { Link } from 'react-router';
+import Navigation from 'react-toolbox/lib/navigation';
+
+// at some point you should move out the right sidepanel into a component...
 
 export default class LandbankLayout extends Component {
 
@@ -152,8 +157,12 @@ export default class LandbankLayout extends Component {
                     <div><IconButton icon='close' onClick={ this.toggleSidebar }/></div>
                     <div style={{ flex: 1 }}>
                         <p>Supplemental content goes here.</p>
-                        <p>hello</p>
-                        <Button onClick={()=> this.showReAuth()}>sign in again?</Button>
+                        <Navigation type='vertical'>
+                            <Link to='/'>
+                                <Button>Back</Button>
+                            </Link>
+                            <Button onClick={()=> this.showReAuth()}>sign in again?</Button>
+                        </Navigation>
                         {(reAuthVisible) ? <MiniLogInForm logIn={this.logIn} colWidth={3}/>
                             : <span></span>
                         }
