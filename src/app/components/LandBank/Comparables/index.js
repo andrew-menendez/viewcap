@@ -26,6 +26,7 @@ export default class Comparables extends Component {
       this.fetchData=this.fetchData.bind(this)
       this.removeWidget=this.removeWidget.bind(this)
       this.addGraph=this.addGraph.bind(this)
+      this.processData=this.processData.bind(this)
     }
 
     fetchData(state, instance){
@@ -51,6 +52,30 @@ export default class Comparables extends Component {
 
     }
 
+    processData(records){
+      let _records=records;
+      const numericColumns=[
+                            "CLOS3",
+                            "CLOS4",
+                            "averageSales",
+                            "closedToDate",
+                            "last12Months",
+                            "lastYearClose",
+                            "lotSQFT",
+                            "monthAverage",
+                            "thisYearClosed",
+                            "totalLots"
+                            ]
+      _records.forEach(function(record){
+       numericColumns.forEach(function(col){
+         if(record[col]){
+           record[col]=Number(record[col]);
+         }
+       })
+     })
+      return _records;
+    }
+
     componentDidMount() {
         this.fetchData();
     }
@@ -69,12 +94,13 @@ export default class Comparables extends Component {
     addGraph(){
       // need to update the logic here...
       console.log("add graph data", this.state.data);
+      let _data=this.processData(this.state.data.slice(0,10))
       let _widgets=this.state.widgets;
       let _newWidget={
                       id:3,
                       type: 'lineGraph',
                       title: 'My Sweet Line Graph',
-                      data: this.state.data.slice(0,10),
+                      data:_data ,
                       style:{'width':'400px'}
                     };
       _widgets.push(_newWidget);
@@ -132,6 +158,11 @@ export default class Comparables extends Component {
     );
   }
 }
+
+/*
+
+
+*/
 
 
 
