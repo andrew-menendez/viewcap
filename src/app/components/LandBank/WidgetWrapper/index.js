@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import {Col} from 'react-flexbox-grid/lib';
 import {Button} from 'react-toolbox/lib/button';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-// import './style.css';
+import LineGraph from '../Widgets/LineGraph';
 
 export default class WidgetWrapper extends Component {
   // static propTypes = {}
@@ -19,11 +19,12 @@ export default class WidgetWrapper extends Component {
       this.widgetServer = this.widgetServer.bind(this);
     }
 
-  widgetServer = (type) => {
-
+  widgetServer = (type, data) => {
+    console.log("widget server data", data)
     const widgeObj= {
-        'type1':<p> this is one widget </p>,
-        'type2':<p> this is a different widget </p>
+        'type1':<p> this is a widget </p>,
+        'type2':<p> this is a different widget </p>,
+        'lineGraph':<LineGraph data={data}/>
 
     }
 
@@ -47,7 +48,7 @@ export default class WidgetWrapper extends Component {
           <CardTitle title={widget.title} subtitle="Subtitle here"/>
 
           <div style={widget.style}>
-            {this.widgetServer(widget.type)}
+            {this.widgetServer(widget.type, widget.data)}
           </div>
           <CardActions>
             <Button label="close" icon="close" onClick={()=>remove(widget.id)} />

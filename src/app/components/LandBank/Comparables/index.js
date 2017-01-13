@@ -2,11 +2,12 @@ import React, { PropTypes, Component } from 'react';
 import ReactTable from 'react-table'
 import axios from 'axios'
 import classnames from 'classnames';
-
-
+import {Grid, Row, Col} from 'react-flexbox-grid/lib';
+import {Button} from 'react-toolbox/lib/button';
+import WidgetWrapper from '../WidgetWrapper';
 
 import theme from './react-table.scss';
-
+import './style.css';
 
 export default class Comparables extends Component {
   // static propTypes = {}
@@ -17,10 +18,14 @@ export default class Comparables extends Component {
         this.state = {
                 activeTab: 'comparables',
                 data:[],
-                loading:true
+                loading:true,
+                widgets: [
+                  ]
               }
 
       this.fetchData=this.fetchData.bind(this)
+      this.removeWidget=this.removeWidget.bind(this)
+      this.addGraph=this.addGraph.bind(this)
     }
 
     fetchData(state, instance){
@@ -50,12 +55,39 @@ export default class Comparables extends Component {
         this.fetchData();
     }
 
+    removeWidget(id){
+    //need to use some filter method
+      let _widgets=this.state.widgets;
+      console.log(_widgets);
+      if(_widgets.length){
+        _widgets = _widgets.filter(widget=> widget.id != id)
+      }
+
+      this.setState({widgets:_widgets})
+    }
+
+    addGraph(){
+      // need to update the logic here...
+      console.log("add graph data", this.state.data);
+      let _widgets=this.state.widgets;
+      let _newWidget={
+                      id:3,
+                      type: 'lineGraph',
+                      title: 'My Sweet Line Graph',
+                      data: this.state.data.slice(0,10),
+                      style:{'width':'400px'}
+                    };
+      _widgets.push(_newWidget);
+      this.setState({widgets:_widgets});
+    }
+
   // since this is a landbank only component, I suppose we can just hardcode in the inputs?
   //
 
   render() {
     const { className } = this.props;
-    const { data, loading } = this.state;
+    const { data, loading, widgets } = this.state;
+    const removeWidget = this.removeWidget;
     const columns = [
     {header: 'builder', accessor:'builder'},
     {header:'area', accessor:'area'},
@@ -71,63 +103,35 @@ export default class Comparables extends Component {
 
     return (
       <div className={classnames('Comparables', className)}>
-        <p className="hello">loading: {loading}</p>
-
-
-          <ReactTable
-            columns={columns}
-            //manual // This forces table not to paginate or sort automatically, so we can handle things server-side
-            data={data} // Set the rows to be displayed
-            //pages={this.state.pages} // Display the total number of pages
-            loading={loading} // Display the loading overlay when we need it
-            //onChange={this.fetchData} // Request new data when things change
-            pageSize={25}
-            style={theme}
-          />
+        <div className="tab-header">
+          <h4>Comparables</h4>
+          <Button  onClick={()=> this.addGraph()}raised>Graph + </Button>
+        </div>
+        <Grid fluid>
+        <Row around = "xs">
+          {(widgets) ? widgets.map((widget,i)=> <WidgetWrapper key={i} widget={widget} remove={removeWidget} /> )
+                    : <span>no widgets found</span>
+                  }
+        </Row>
+        <Row around = "xs">
+          <Col xs={12}>
+            <ReactTable
+              columns={columns}
+              //manual // This forces table not to paginate or sort automatically, so we can handle things server-side
+              data={data} // Set the rows to be displayed
+              //pages={this.state.pages} // Display the total number of pages
+              loading={loading} // Display the loading overlay when we need it
+              //onChange={this.fetchData} // Request new data when things change
+              pageSize={15}
+              style={theme}
+            />
+          </Col>
+        </Row>
+        </Grid>
       </div>
     );
   }
 }
 
 
-/*
-
-"id": 127,
-      "version": 540,
-      "name": "Lennar: Mission Hills Estates:03",
-      "project": "Lennar: Mission Hills Estates",
-      "simulationMonth": "3",
-      "monthEnd": "2017-02-28",
-      "projectMonth": "0",
-      "landAcquisition": "0000",
-      "improvement": "0.000",
-      "builderImprovement": "0000",
-      "lotsAvailableForSale": "125",
-      "lotsDrawnDown": "0",
-      "totalExposure": "0000",
-      "costRemaining": "3375000",
-      "maximumRevenue": "12937500.00",
-      "sales": "0.00",
-      "totalSales": "0.00",
-      "deposit": "0.00",
-      "totalDeposits": "1940625.00",
-      "depositHurdle": "9703125.00",
-      "returnOfDespoit": "0.00",
-      "debtRepaymentRate": "0.60",
-      "managementFee": "9375.00",
-      "operatingIncome": "-9375.00",
-      "fundingRequired": "9375.00",
-      "netDistribution": "0.00",
-      "unleveredCashFlow": "-9375.00",
-      "debt": "5625.00",
-      "investorCapital": "3750.00",
-      "netRevenue": "0.00",
-      "totalSources": "9375.00",
-      "landAndImprovements": "0.00",
-      "interestReserve": "0.00",
-      "totalUses": "9375.00",
-      "cashForDistribution": "0.00",
-      "priorMonth": "Lennar: Mission Hills Estates:02",
-      "finalMonth": false
-*/
 
