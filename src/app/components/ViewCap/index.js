@@ -67,7 +67,7 @@ export default class ViewCap extends Component {
 
           {
             (loggedIn) ? <ModelSelect user="viewcap"/>
-            : <LogInForm logIn={this.logIn}/>
+            : <LogInForm logIn={this.logIn} colWidth={8}/>
           }
         </div>
       </div>

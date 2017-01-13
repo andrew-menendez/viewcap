@@ -5,6 +5,9 @@ import LBSidePanel from '../LBSidePanel';
 import LBSummary from '../LBSummary';
 import Comparables from '../Comparables';
 // import ViewCap from '../ViewCap';
+import axios from 'axios';
+import MiniLogInForm from '../MiniLogInForm';
+import { Button } from 'react-toolbox/lib/button';
 
 export default class LandbankLayout extends Component {
 
@@ -15,12 +18,15 @@ export default class LandbankLayout extends Component {
                 drawerActive: false,
                 drawerPinned: true,
                 sidebarPinned: false,
-                activeTab: 'summary'
+                activeTab: 'summary',
+                reAuthVisible:false
             }
         this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
         this.closeFunc = this.closeFunc.bind(this);
         this.tabControl = this.tabControl.bind(this);
         this.tabSet = this.tabSet.bind(this);
+        this.logIn = this.logIn.bind(this);
+        this.showReAuth=this.showReAuth.bind(this);
     }
 
     toggleDrawerActive = () => {
@@ -93,11 +99,30 @@ export default class LandbankLayout extends Component {
     return tabObj[this.state.activeTab]
   }
 
+  logIn(creds){
+    let _this=this;
+
+    axios.post('api/login', {
+        domain:creds.domain,
+        user: creds.user,
+        pass: creds.pass
+      })
+      .then(()=>{this.setState({reAuthVisible:false})})
+      .then(()=>{this.toggleSidebar()})
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
+  showReAuth(){
+    let isVisible= this.state.reAuthVisible;
+    this.setState({reAuthVisible:!isVisible})
+  }
+
     render() {
         let style={
             minHeight:'400px'
         }
-
+        const { reAuthVisible } = this.state;
         return (
             <Layout>
                 <NavDrawer active={this.state.drawerActive}
@@ -127,6 +152,12 @@ export default class LandbankLayout extends Component {
                     <div><IconButton icon='close' onClick={ this.toggleSidebar }/></div>
                     <div style={{ flex: 1 }}>
                         <p>Supplemental content goes here.</p>
+                        <p>hello</p>
+                        <Button onClick={()=> this.showReAuth()}>sign in again?</Button>
+                        {(reAuthVisible) ? <MiniLogInForm logIn={this.logIn} colWidth={3}/>
+                            : <span></span>
+                        }
+
                     </div>
                 </Sidebar>
             </Layout>
@@ -134,7 +165,7 @@ export default class LandbankLayout extends Component {
     }
 }
 
-/*
+/* () => tabSet('jpp')
 
 <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
                         <h1>Main Content</h1>

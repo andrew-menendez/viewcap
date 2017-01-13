@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 // import './style.css';
 
-export default class  LogInForm extends Component {
+export default class  MiniLogInForm extends Component {
 
   //let _domain, _user, _pass ;
   constructor(props) {
@@ -34,16 +34,16 @@ export default class  LogInForm extends Component {
   const { className, logIn, colWidth } = this.props;
 
   return (
-    <Grid>
-      <Row center="xs">
-        <Col xs={colWidth}>
+
+
+
         <form onSubmit={() =>logIn({
                                     domain:this.state.domain,
                                     user:this.state.user,
                                     pass:this.state.pass
                                   })}
               className="log-in-form">
-        <h4>Please authenticate with your ModelShop credentials</h4>
+        <span>re-authenticate with your ModelShop credentials</span>
           <section>
 
             <Input label='ModelShop Domain' name='domain' type="text" required  value={this.state.domain} onChange={this.handleChange.bind(this,'domain')}/>
@@ -60,9 +60,9 @@ export default class  LogInForm extends Component {
                                     pass:this.state.pass
                                   })}>Log in</Button>
         </form>
-      </Col>
-      </Row>
-    </Grid>
+
+
+
     );
   }
 
