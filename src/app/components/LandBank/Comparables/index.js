@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 import {Button} from 'react-toolbox/lib/button';
 import WidgetWrapper from '../WidgetWrapper';
-
+import TableCheckbox from './TableCheckbox.js';
 import theme from './react-table.scss';
 import './style.css';
 
@@ -27,6 +27,7 @@ export default class Comparables extends Component {
       this.removeWidget=this.removeWidget.bind(this)
       this.addGraph=this.addGraph.bind(this)
       this.processData=this.processData.bind(this)
+      this.handleCheck=this.handleCheck.bind(this)
     }
 
     fetchData(state, instance){
@@ -107,6 +108,11 @@ export default class Comparables extends Component {
       this.setState({widgets:_widgets});
     }
 
+    handleCheck(row, index, value){
+      console.log("handle the check?")
+      alert(row);
+    }
+
   // since this is a landbank only component, I suppose we can just hardcode in the inputs?
   // we should do pre-canned graphs and custom graphs.
 
@@ -115,6 +121,7 @@ export default class Comparables extends Component {
     const { data, loading, widgets } = this.state;
     const removeWidget = this.removeWidget;
     const columns = [
+    {header:'select',render:({index,row}) => <TableCheckbox index={index} row={row}> </TableCheckbox>},
     {header: 'builder', accessor:'builder'},
     {header:'area', accessor:'area'},
     {header:'averageSales', accessor:'averageSales'},
@@ -150,6 +157,7 @@ export default class Comparables extends Component {
               //onChange={this.fetchData} // Request new data when things change
               pageSize={15}
               style={theme}
+
             />
           </Col>
         </Row>
