@@ -98,17 +98,17 @@ export default class Comparables extends Component {
       let _widgets=this.state.widgets;
       let _newWidget={
                       id:3,
-                      type: 'lineGraph',
-                      title: 'My Sweet Line Graph',
-                      data:_data ,
-                      style:{'width':'400px'}
+                      type: 'BarChart',
+                      title: 'My Sweet BarChart',
+                      data:_data
+                      // style:{'width':'400px'}
                     };
       _widgets.push(_newWidget);
       this.setState({widgets:_widgets});
     }
 
   // since this is a landbank only component, I suppose we can just hardcode in the inputs?
-  //
+  // we should do pre-canned graphs and custom graphs.
 
   render() {
     const { className } = this.props;

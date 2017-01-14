@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import {Col} from 'react-flexbox-grid/lib';
 import {Button} from 'react-toolbox/lib/button';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import LineGraph from '../Widgets/LineGraph';
+import MyBarChart from '../Widgets/BarChart';
 
 export default class WidgetWrapper extends Component {
   // static propTypes = {}
@@ -24,7 +24,7 @@ export default class WidgetWrapper extends Component {
     const widgeObj= {
         'type1':<p> this is a widget </p>,
         'type2':<p> this is a different widget </p>,
-        'lineGraph':<LineGraph data={data}/>
+        'BarChart':<MyBarChart data={data}/>
 
     }
 
