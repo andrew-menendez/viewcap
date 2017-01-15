@@ -20,7 +20,8 @@ export default class Comparables extends Component {
                 data:[],
                 loading:true,
                 widgets: [
-                  ]
+                  ],
+                checkedRows:{}
               }
 
       this.fetchData=this.fetchData.bind(this)
@@ -68,6 +69,7 @@ export default class Comparables extends Component {
                             "totalLots"
                             ]
       _records.forEach(function(record){
+        record.checked=false;
        numericColumns.forEach(function(col){
          if(record[col]){
            record[col]=Number(record[col]);
@@ -109,9 +111,15 @@ export default class Comparables extends Component {
     }
 
     handleCheck(row, index, value){
-      console.log("handle the check?")
-      alert(row);
+
+      console.log(row,index,value)
+      let _checkedRows=this.state.checkedRows;
+      (value) ? _checkedRows[index]=row : delete _checkedRows[index];
+      this.setState({checkedRows:_checkedRows})
+      console.log(this.state.checkedRows);
     }
+
+    //addCustomGraph(){}
 
   // since this is a landbank only component, I suppose we can just hardcode in the inputs?
   // we should do pre-canned graphs and custom graphs.
@@ -120,8 +128,9 @@ export default class Comparables extends Component {
     const { className } = this.props;
     const { data, loading, widgets } = this.state;
     const removeWidget = this.removeWidget;
+    const handleCheck = this.handleCheck;
     const columns = [
-    {header:'select',render:({index,row}) => <TableCheckbox index={index} row={row}> </TableCheckbox>},
+    {header:'select',render:({index,row}) => <TableCheckbox index={index} row={row} checkFunction={handleCheck}> </TableCheckbox>},
     {header: 'builder', accessor:'builder'},
     {header:'area', accessor:'area'},
     {header:'averageSales', accessor:'averageSales'},
@@ -139,6 +148,7 @@ export default class Comparables extends Component {
         <div className="tab-header">
           <h4>Comparables</h4>
           <Button  onClick={()=> this.addGraph()}raised>Graph + </Button>
+          <Button  onClick={()=> this.addCustomGraph()}raised>Custom Graph + </Button>
         </div>
         <Grid fluid>
         <Row around = "xs">

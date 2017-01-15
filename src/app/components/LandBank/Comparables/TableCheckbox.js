@@ -7,16 +7,30 @@ export default class TableCheckbox extends Component {
 
   constructor(props) {
         super(props);
-        this.state = { check1: false}
+        this.state = {
+          check: false,
+          row:{},
+          index:null,
+          checkFunction:null
+        }
 
-        // this.handleChange=this.handleChange.bind(this)
+        this.handleChange=this.handleChange.bind(this)
     }
 
 
-  handleChange(field,checkFunction,row, value){
-    console.log(checkFunction,row,value)
-    //this.setState({...this.state, [field]: value});
-    //checkFunction(row,index,value)
+  handleChange(checkFunction,row,index,value){
+
+    console.log(value,row);
+
+    row.checked=value;
+    checkFunction(row,index,value)
+  }
+
+  componentDidUpdate(){
+    // console.log(this.state)
+    // const {checkFunction, row, index, value, check} =this.state
+    // checkFunction(row,index,check);
+
   }
 
 
@@ -25,11 +39,12 @@ export default class TableCheckbox extends Component {
     return (
       <div>
         <Checkbox
-          checked={this.state.check1}
-
+          checked={row.checked}
+          onChange={this.handleChange.bind(this,checkFunction,row, index)}
         />
       </div>
     );
   }
 }
 //this.handleChange.bind(this,'check1',checkFunction,row)
+//checkFunction(row,index,value)
