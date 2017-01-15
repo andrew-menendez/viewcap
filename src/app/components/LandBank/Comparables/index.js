@@ -21,7 +21,8 @@ export default class Comparables extends Component {
                 loading:true,
                 widgets: [
                   ],
-                checkedRows:{}
+                checkedRows:{},
+                graphIndex:0
               }
 
       this.fetchData=this.fetchData.bind(this)
@@ -97,29 +98,46 @@ export default class Comparables extends Component {
     addGraph(){
       // need to update the logic here...
       console.log("add graph data", this.state.data);
+      let graphIndex=this.state.graphIndex
       let _data=this.processData(this.state.data.slice(0,10))
       let _widgets=this.state.widgets;
       let _newWidget={
-                      id:3,
+                      id:graphIndex,
                       type: 'BarChart',
                       title: 'My Sweet BarChart',
                       data:_data
                       // style:{'width':'400px'}
                     };
       _widgets.push(_newWidget);
-      this.setState({widgets:_widgets});
+      let _graphIndex=graphIndex + 1;
+      this.setState({widgets:_widgets, graphIndex:_graphIndex});
     }
 
     handleCheck(row, index, value){
-
-      console.log(row,index,value)
       let _checkedRows=this.state.checkedRows;
       (value) ? _checkedRows[index]=row : delete _checkedRows[index];
       this.setState({checkedRows:_checkedRows})
       console.log(this.state.checkedRows);
     }
 
-    //addCustomGraph(){}
+    addCustomGraph(){
+      console.log("add graph data", this.state.checkedRows);
+      let graphIndex=this.state.graphIndex
+      let dataObj=this.state.checkedRows;
+      let dataArray=Object.values(dataObj);
+      let _data=this.processData(dataArray)
+      let _widgets=this.state.widgets;
+      let _newWidget={
+                      id:graphIndex,
+                      type: 'BarChart',
+                      title: 'Custom Bar Chart',
+                      data:_data
+                      // style:{'width':'400px'}
+                    };
+      _widgets.push(_newWidget);
+      let _graphIndex=graphIndex + 1;
+      this.setState({widgets:_widgets, checkedRows:{}, graphIndex:_graphIndex});
+    }
 
   // since this is a landbank only component, I suppose we can just hardcode in the inputs?
   // we should do pre-canned graphs and custom graphs.
