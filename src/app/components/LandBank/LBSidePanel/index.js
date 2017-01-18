@@ -18,7 +18,7 @@ export default class SidePanel extends Component {
     return (
   <div>
   {
-    (pinned) ? <AppBar rightIcon='close'  onRightIconClick={ closeFunc }> LB Menu </AppBar>
+    (pinned) ? <AppBar rightIcon='close'  onRightIconClick={ closeFunc }> LB MenuX </AppBar>
     : <AppBar  leftIcon={<Lock/>} rightIcon='close'  onRightIconClick={ closeFunc } onLeftIconClick={ pinFunc }> LB Menu </AppBar>
   }
 
