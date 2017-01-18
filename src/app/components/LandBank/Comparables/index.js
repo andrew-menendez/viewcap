@@ -170,7 +170,7 @@ export default class Comparables extends Component {
           <h4>Comparables</h4>
           <Button  onClick={()=> this.addGraph()}raised>Graph + </Button>
           <Button  onClick={()=> this.addCustomGraph()}raised>Custom Graph + </Button>
-          <AddGraphModal addGraph={this.addGraph}/>
+          <AddGraphModal addGraph={this.addCustomGraph.bind(this)}/>
         </div>
         <Grid fluid>
         <Row around = "xs">
