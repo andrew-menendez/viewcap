@@ -7,6 +7,7 @@ import {Button} from 'react-toolbox/lib/button';
 import WidgetWrapper from '../WidgetWrapper';
 import TableCheckbox from './TableCheckbox.js';
 import theme from './react-table.scss';
+import AddGraphModal from './AddGraphModal';
 import './style.css';
 
 export default class Comparables extends Component {
@@ -22,7 +23,8 @@ export default class Comparables extends Component {
                 widgets: [
                   ],
                 checkedRows:{},
-                graphIndex:0
+                graphIndex:0,
+                modalIsOpen: false
               }
 
       this.fetchData=this.fetchData.bind(this)
@@ -30,6 +32,7 @@ export default class Comparables extends Component {
       this.addGraph=this.addGraph.bind(this)
       this.processData=this.processData.bind(this)
       this.handleCheck=this.handleCheck.bind(this)
+
     }
 
     fetchData(state, instance){
@@ -167,6 +170,7 @@ export default class Comparables extends Component {
           <h4>Comparables</h4>
           <Button  onClick={()=> this.addGraph()}raised>Graph + </Button>
           <Button  onClick={()=> this.addCustomGraph()}raised>Custom Graph + </Button>
+          <AddGraphModal addGraph={this.addGraph}/>
         </div>
         <Grid fluid>
         <Row around = "xs">
