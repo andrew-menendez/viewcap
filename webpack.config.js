@@ -35,6 +35,11 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap')
       },
       {
+        test: /(custom-theme\.scss)$/,
+        include:/(node_modules)/,
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?sourceMap')
+      },
+      {
         test: /\.scss$/,
         exclude: /(node_modules)/,
         loader:"style-loader!css-loader!autoprefixer-loader!sass-loader",

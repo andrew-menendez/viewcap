@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { AppBar, Checkbox, IconButton } from 'react-toolbox';
-import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
+import { AppBar, Checkbox, IconButton, Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
 import SidePanel from '../SidePanel';
 import ViewCap from '../ViewCap';
+
+import style from './layout.css'
 
 export default class SampleLayout extends Component {
 
@@ -61,6 +62,7 @@ export default class SampleLayout extends Component {
 
     render() {
         return (
+            <div style={style}>
             <Layout>
                 <NavDrawer active={this.state.drawerActive}
                     pinned={this.state.drawerPinned} permanentAt='xxxl'
@@ -68,9 +70,10 @@ export default class SampleLayout extends Component {
                     <SidePanel closeFunc={this.closeFunc}/>
                 </NavDrawer>
                 <Panel>
-                    <AppBar title="ViewCap Content" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
+                    <AppBar title="ViewCap" leftIcon='menu' onLeftIconClick={ this.toggleDrawerActive } />
 
-                    <ViewCap/>
+                        <ViewCap/>
+
 
                 </Panel>
                 <Sidebar pinned={ this.state.sidebarPinned } width={ 5 }>
@@ -80,6 +83,7 @@ export default class SampleLayout extends Component {
                     </div>
                 </Sidebar>
             </Layout>
+         </div>
         );
     }
 }

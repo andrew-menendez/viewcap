@@ -4,6 +4,7 @@ import axios from 'axios';
 import Model from '../Model';
 import {Button} from 'react-toolbox/lib/button';
 import RefeshIcon from 'react-icons/lib/md/cached';
+
 //react-icons/lib/md/cached
 
 // import './style.css';
@@ -82,6 +83,13 @@ class ModelSelect extends Component {
     return (_models) ? true : false;
 
   }
+
+  // addRandomIcons(models){
+
+  //   models.forEach((model)=>{
+  //     model.icon=
+  //   })
+  // }
 
   render() {
     const { className} = this.props;
