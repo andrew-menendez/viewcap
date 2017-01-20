@@ -22,7 +22,7 @@ export default class Responsive extends Component {
           <div className={classnames('Responsive', className)}>
 
 
-            <div style={{'backgroundColor':'blue', 'min-width':'100px', 'min-height':'100px'}}></div>
+            <div style={{'backgroundColor':'blue', 'minWidth':'100px', 'minHeight':'100px'}}></div>
 
 
           </div>

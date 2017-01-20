@@ -1,7 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import Modal from 'react-modal';
-
+import {Button} from 'react-toolbox/lib/button';
+// import Select from 'react-select';
+// import style from 'react-select/dist/react-select.css';
+import GraphTypeDropdown from './ModalComponents/GraphTypeDropdown.js';
+import GraphForm from './ModalComponents/GraphForm.js'
 const customStyles = {
   content : {
     top                   : '50%',
@@ -14,17 +18,21 @@ const customStyles = {
 };
 
 
+
+
 export default class AddGraphModal extends Component {
 
   constructor(props) {
         super(props);
         this.state = {
-              modalIsOpen: false
+              modalIsOpen: false,
+              graphType:'line'
             };
 
         this.openModal = this.openModal.bind(this);
         this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.changeGraphType = this.changeGraphType.bind(this);
     }
 
     openModal() {
@@ -39,12 +47,18 @@ export default class AddGraphModal extends Component {
   closeModal() {
     this.setState({modalIsOpen: false});
   }
+  changeGraphType(value){
+    console.log('parent', value)
+    this.setState({graphType:value})
+  }
 
   render() {
     const { className, addGraph } = this.props;
+    const { graphType } = this.state;
+
     return (
-      <div className={classnames('AddGraphModal', className)}>
-        <button onClick={this.openModal}>Open Modal</button>
+      <div className={classnames('AddGraphModal', className)} >
+        <Button onClick={this.openModal}>Open Modal</Button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -54,16 +68,16 @@ export default class AddGraphModal extends Component {
         >
 
           <h2 ref="subtitle">Hello</h2>
-          <button onClick={this.closeModal}>close</button>
-          <button onClick={addGraph}>add a graph</button>
+          <Button onClick={this.closeModal}>X</Button>
+          <Button onClick={addGraph}>add a graph</Button>
           <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
+          <div>
+            <GraphTypeDropdown changeGraphType={this.changeGraphType}/>
+          </div>
+          <div>
+            <GraphForm graphType={graphType}/>
+          </div>
+
         </Modal>
       </div>
     );

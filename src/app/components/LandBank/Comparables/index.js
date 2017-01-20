@@ -4,6 +4,7 @@ import axios from 'axios'
 import classnames from 'classnames';
 import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 import {Button} from 'react-toolbox/lib/button';
+import Navigation from 'react-toolbox/lib/navigation';
 import WidgetWrapper from '../WidgetWrapper';
 import TableCheckbox from './TableCheckbox.js';
 import theme from './react-table.scss';
@@ -150,6 +151,10 @@ export default class Comparables extends Component {
     const { data, loading, widgets } = this.state;
     const removeWidget = this.removeWidget;
     const handleCheck = this.handleCheck;
+    const actions = [
+        { label: 'Add Graph', raised: true, icon: 'add', onClick:this.addGraph},
+        { label: 'Custom Graph', raised: true, icon: 'add',onClick:this.addCustomGraph.bind(this)}
+      ];
     const columns = [
     {header:'select',render:({index,row}) => <TableCheckbox index={index} row={row} checkFunction={handleCheck}> </TableCheckbox>},
     {header: 'builder', accessor:'builder'},
@@ -168,8 +173,8 @@ export default class Comparables extends Component {
       <div className={classnames('Comparables', className)}>
         <div className="tab-header">
           <h4>Comparables</h4>
-          <Button  onClick={()=> this.addGraph()}raised>Graph + </Button>
-          <Button  onClick={()=> this.addCustomGraph()}raised>Custom Graph + </Button>
+          <Navigation type='horizontal' actions={actions} />
+
           <AddGraphModal addGraph={this.addCustomGraph.bind(this)}/>
         </div>
         <Grid fluid>
