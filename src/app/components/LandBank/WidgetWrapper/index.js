@@ -4,6 +4,7 @@ import {Col} from 'react-flexbox-grid/lib';
 import {Button} from 'react-toolbox/lib/button';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import MyBarChart from '../Widgets/BarChart';
+import Responsive from '../Widgets/Responsive';
 
 export default class WidgetWrapper extends Component {
   // static propTypes = {}
@@ -22,7 +23,7 @@ export default class WidgetWrapper extends Component {
   widgetServer = (type, data) => {
     console.log("widget server data", data)
     const widgeObj= {
-        'type1':<p> this is a widget </p>,
+        'type1':<Responsive/>,
         'type2':<p> this is a different widget </p>,
         'BarChart':<MyBarChart data={data}/>
 
@@ -34,7 +35,7 @@ export default class WidgetWrapper extends Component {
   render() {
     const { className, widget, remove } = this.props;
     var style={
-      minHeight:'300px',
+      minHeight:'200px',
       minWidth:'200px',
       margin:'10px',
       'borderRadius':'10px',

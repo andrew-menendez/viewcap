@@ -8,6 +8,7 @@ import FaLineChart from 'react-icons/lib/fa/line-chart';
 import FaTable from 'react-icons/lib/fa/table';
 import FaCalendar from 'react-icons/lib/fa/calendar';
 import FaCalendarPlusO from 'react-icons/lib/fa/calendar-plus-o';
+import BankIcon from 'react-icons/lib/fa/bank';
 
 export default class SidePanel extends Component {
 
@@ -18,7 +19,7 @@ export default class SidePanel extends Component {
     return (
   <div>
   {
-    (pinned) ? <AppBar rightIcon='close'  onRightIconClick={ closeFunc }> LB MenuX </AppBar>
+    (pinned) ? <AppBar leftIcon={<BankIcon/>} rightIcon='close'  onRightIconClick={ closeFunc }> Menu </AppBar>
     : <AppBar  leftIcon={<Lock/>} rightIcon='close'  onRightIconClick={ closeFunc } onLeftIconClick={ pinFunc }> LB Menu </AppBar>
   }
 

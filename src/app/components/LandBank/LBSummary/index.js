@@ -18,13 +18,13 @@ export default class LBSummary extends Component {
                       id:1,
                       type: 'type1',
                       title: 'Fake 1',
-                      style:{'width':'500px'}
+                      style:{'width':'300px'}
                     },
                     {
                       id:2,
                       type: 'type2',
                       title: 'Fake 2',
-                      style:{'width':'200px'}
+                      style:{'width':'300px'}
                     }
                   ]
                 }
@@ -42,7 +42,7 @@ export default class LBSummary extends Component {
     this.setState({widgets:_widgets})
   }
   //
-  //
+  //<Row around="xs">
 
   render() {
     const { className } = this.props;
