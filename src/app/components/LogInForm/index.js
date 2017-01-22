@@ -32,7 +32,7 @@ export default class  LogInForm extends Component {
 
   render(){
   const { className, logIn, colWidth } = this.props;
-
+  // remove duplicate code here!
   return (
     <Grid>
       <Row center="xs">
