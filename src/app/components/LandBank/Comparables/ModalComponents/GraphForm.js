@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import Input from 'react-toolbox/lib/input';
 import { Button } from 'react-toolbox/lib/button';
+import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 
 const graphOptions={
       BarChart:{
@@ -32,6 +33,11 @@ const graphOptions={
       }
     };
 
+const inputStyle = {
+  margin:'5px',
+  border:'1px solid #efefef',
+  borderRadius:'5px'
+}
 
 
 export default class GraphForm extends Component {
@@ -67,7 +73,7 @@ export default class GraphForm extends Component {
     this.setState({values: _values});
 
   }
-  // add a grid around here?
+  // add a grid around here? need to sort this out.
   buildForm(graphType,graphOptions){
     let schema = graphOptions[graphType];
     let inputFields = Object.keys(schema);
@@ -75,24 +81,28 @@ export default class GraphForm extends Component {
     const listItems = inputFields.map((field,i) => {
       if(schema[field].type ==='text'){
         return (
-            <Input key={i}
-                   label={field}
-                    name={field}
-                    type="text"
-                    value={this.state.values[field]}
-                    onChange={this.handleChange.bind(this,field)}
-                  />
+              <Col key={i} style={inputStyle}>
+                <Input key={i}
+                       label={field}
+                        name={field}
+                        type="text"
+                        value={this.state.values[field]}
+                        onChange={this.handleChange.bind(this,field)}
+                      />
+              </Col>
             )
       } else if (schema[field].type === 'dropdown') {
           return(
-              <Dropdown
-                  key={i}
-                  auto
-                  label={field}
-                  onChange={this.handleChange.bind(this,field)}
-                  source={schema[field].options}
-                  value={this.state.values[field]}
-                />
+              <Col key={i} style={inputStyle}>
+                <Dropdown
+                    key={i}
+                    auto
+                    label={field}
+                    onChange={this.handleChange.bind(this,field)}
+                    source={schema[field].options}
+                    value={this.state.values[field]}
+                  />
+              </Col>
             )
       } else {
         return (<p key={i}>not text or dropdown</p>)
@@ -100,7 +110,7 @@ export default class GraphForm extends Component {
     });// end map function
 
   return (
-    <div>{listItems}</div>
+    <Row around="xs" >{listItems}</Row>
     );
   }
 
@@ -109,10 +119,14 @@ export default class GraphForm extends Component {
 
     return (
       <div className={classnames('GraphForm', className)}>
-      <p>do stuffz</p>
-      <form>
-        {this.buildForm(graphType, graphOptions)}
-      </form>
+      <p>Enter or select the values for the graph parameters: </p>
+
+        <Grid fluid>
+
+            {this.buildForm(graphType, graphOptions)}
+
+        </Grid>
+
       <Button>Submit</Button>
       </div>
     );

@@ -17,7 +17,11 @@ const customStyles = {
   }
 };
 
-
+const basicStyle={
+  minWidth:'300px',
+  maxWidth:'600px',
+  minHeight:'400px'
+}
 
 
 export default class AddGraphModal extends Component {
@@ -66,18 +70,18 @@ export default class AddGraphModal extends Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-
-          <h2 ref="subtitle">Hello</h2>
-          <Button onClick={this.closeModal}>X</Button>
-          <Button onClick={addGraph}>add a graph</Button>
-          <div>I am a modal</div>
-          <div>
-            <GraphTypeDropdown changeGraphType={this.changeGraphType}/>
-          </div>
-          <div>
-            <GraphForm graphType={graphType}/>
-          </div>
-
+        <div style={basicStyle}>
+            <h2 ref="subtitle">Hello</h2>
+            <Button onClick={this.closeModal}>X</Button>
+            <Button onClick={addGraph}>add a graph</Button>
+            <div>Select a type of graph:</div>
+            <div>
+              <GraphTypeDropdown changeGraphType={this.changeGraphType}/>
+            </div>
+            <div>
+              <GraphForm graphType={graphType}/>
+            </div>
+        </div>
         </Modal>
       </div>
     );
