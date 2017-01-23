@@ -95,7 +95,7 @@ export default class LandbankLayout extends Component {
     const tabObj= {
         'summary':<LBSummary/>,
         'jpp':<p> other jpp here </p>,
-        'comparables':<Comparables/>,
+        'comparables':<Comparables panelClose={this.closeFunc}/>,
         'simple_residual':<p> simple_residual </p>,
         'quarterly':<p> quarterly </p>,
         'monthly':<p> monthly </p>

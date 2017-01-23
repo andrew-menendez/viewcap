@@ -147,7 +147,7 @@ export default class Comparables extends Component {
   // we should do pre-canned graphs and custom graphs.
 
   render() {
-    const { className } = this.props;
+    const { className, panelClose } = this.props;
     const { data, loading, widgets } = this.state;
     const removeWidget = this.removeWidget;
     const handleCheck = this.handleCheck;
@@ -173,9 +173,11 @@ export default class Comparables extends Component {
       <div className={classnames('Comparables', className)}>
         <div className="tab-header">
           <h4>Comparables</h4>
-          <Navigation type='horizontal' actions={actions} />
+          <Navigation type='horizontal' actions={actions} >
+            <AddGraphModal addGraph={this.addCustomGraph.bind(this)} panelClose={panelClose}/>
+          </Navigation>
 
-          <AddGraphModal addGraph={this.addCustomGraph.bind(this)}/>
+
         </div>
         <Grid fluid>
         <Row around = "xs">

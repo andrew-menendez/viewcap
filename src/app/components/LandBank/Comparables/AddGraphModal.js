@@ -6,6 +6,8 @@ import {Button} from 'react-toolbox/lib/button';
 // import style from 'react-select/dist/react-select.css';
 import GraphTypeDropdown from './ModalComponents/GraphTypeDropdown.js';
 import GraphForm from './ModalComponents/GraphForm.js'
+import {Grid, Row, Col} from 'react-flexbox-grid/lib';
+
 const customStyles = {
   content : {
     top                   : '50%',
@@ -34,19 +36,22 @@ export default class AddGraphModal extends Component {
             };
 
         this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
+        // this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.changeGraphType = this.changeGraphType.bind(this);
     }
 
     openModal() {
     this.setState({modalIsOpen: true});
+    this.props.panelClose();
   }
 
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.refs.subtitle.style.color = '#f00';
-  }
+  // afterOpenModal() {
+  //   // references are now sync'd and can be accessed.
+  //   // this is how you change refs
+  // put this in render: <h2 ref="subtitle">Hello</h2>
+  //   this.refs.subtitle.style.color = '#f00';
+  // }
 
   closeModal() {
     this.setState({modalIsOpen: false});
@@ -71,16 +76,21 @@ export default class AddGraphModal extends Component {
           contentLabel="Example Modal"
         >
         <div style={basicStyle}>
-            <h2 ref="subtitle">Hello</h2>
-            <Button onClick={this.closeModal}>X</Button>
-            <Button onClick={addGraph}>add a graph</Button>
-            <div>Select a type of graph:</div>
-            <div>
-              <GraphTypeDropdown changeGraphType={this.changeGraphType}/>
-            </div>
+          <div><Button icon='close' floating accent mini style={{float:'right'}} onClick={this.closeModal}></Button></div>
+
+            <h3> Graph Builder</h3>
+            <Row start="xs">
+              <Col>
+                <div style={{padding:'5px', marginTop:'22px', marginRight:'10px'}}>Select a type of graph:</div>
+              </Col>
+              <Col>
+                  <GraphTypeDropdown changeGraphType={this.changeGraphType}/>
+              </Col>
+            </Row>
             <div>
               <GraphForm graphType={graphType}/>
             </div>
+            <Button  raised onClick={addGraph}>add graph</Button>
         </div>
         </Modal>
       </div>
