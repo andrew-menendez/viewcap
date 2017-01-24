@@ -88,7 +88,7 @@ export default class AddGraphModal extends Component {
               </Col>
             </Row>
             <div>
-              <GraphForm graphType={graphType}/>
+              <GraphForm  addGraph={addGraph} graphTitle='temp' graphType={graphType} closeModal={this.closeModal}/>
             </div>
             <Button  raised onClick={addGraph}>add graph</Button>
         </div>

@@ -20,12 +20,12 @@ export default class WidgetWrapper extends Component {
       this.widgetServer = this.widgetServer.bind(this);
     }
 
-  widgetServer = (type, data) => {
-    console.log("widget server data", data)
+  widgetServer = (type, data, params) => {
+
     const widgeObj= {
         'type1':<Responsive/>,
         'type2':<p> this is a different widget </p>,
-        'BarChart':<MyBarChart data={data}/>
+        'BarChart':<MyBarChart data={data} params={params}/>
 
     }
 
@@ -49,7 +49,7 @@ export default class WidgetWrapper extends Component {
           <CardTitle title={widget.title} subtitle="Subtitle here"/>
 
           <div style={widget.style}>
-            {this.widgetServer(widget.type, widget.data)}
+            {this.widgetServer(widget.type, widget.data, widget.params)}
           </div>
           <CardActions>
             <Button label="close" icon="close" onClick={()=>remove(widget.id)} />

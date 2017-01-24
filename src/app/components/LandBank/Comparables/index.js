@@ -124,7 +124,8 @@ export default class Comparables extends Component {
       console.log(this.state.checkedRows);
     }
 
-    addCustomGraph(){
+    addCustomGraph(graphParams, type, title){
+      console.log(graphParams);
       console.log("add graph data", this.state.checkedRows);
       let graphIndex=this.state.graphIndex
       let dataObj=this.state.checkedRows;
@@ -133,15 +134,17 @@ export default class Comparables extends Component {
       let _widgets=this.state.widgets;
       let _newWidget={
                       id:graphIndex,
-                      type: 'BarChart',
-                      title: 'Custom Bar Chart',
-                      data:_data
-                      // style:{'width':'400px'}
+                      type: type,
+                      title: title,
+                      data:_data,
+                      params:graphParams
                     };
       _widgets.push(_newWidget);
       let _graphIndex=graphIndex + 1;
       this.setState({widgets:_widgets, checkedRows:{}, graphIndex:_graphIndex});
     }
+
+
 
   // since this is a landbank only component, I suppose we can just hardcode in the inputs?
   // we should do pre-canned graphs and custom graphs.
@@ -174,7 +177,7 @@ export default class Comparables extends Component {
         <div className="tab-header">
           <h4>Comparables</h4>
           <Navigation type='horizontal' actions={actions} >
-            <AddGraphModal addGraph={this.addCustomGraph.bind(this)} panelClose={panelClose}/>
+            <AddGraphModal selectedRows={this.state.data} addGraph={this.addCustomGraph.bind(this)} panelClose={panelClose}/>
           </Navigation>
 
 

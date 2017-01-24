@@ -10,7 +10,7 @@ const CustomizedAxisTick = React.createClass({
 
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-35)">{payload.value}</text>
+        <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-30)">{payload.value}</text>
       </g>
     );
   }
@@ -29,22 +29,24 @@ export default class MyBarChart extends Component {
     }
 
   render(){
-    const { className, data } = this.props;
+    const { className, data, params } = this.props;
     console.log("data inside BarChart", data);
+    console.log("params inside BarChart", params);
 
     return (
           <div className={classnames('MyBarChart', className)}>
 
-            <BarChart width={600} height={300} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <BarChart width={Number(params.width)} height={Number(params.height)} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
 
 
               <CartesianGrid stroke="#ccc" />
-                <XAxis dataKey="subdivision" name="subdivision" height={60} tick={<CustomizedAxisTick/>} interval={0}/>
-                <YAxis name="Average Sales"/>
+                <XAxis dataKey={params.xKey} name={params.xName} height={60} tick={<CustomizedAxisTick/>} interval={0}/>
+                <YAxis name={params.yName}/>
                 <Tooltip />
                 <Legend verticalAlign="top"/>
-                <Bar dataKey="averageSales" fill="#8884d8" />
-                <Bar dataKey="closedToDate" fill="#82ca9d" />
+                <Bar dataKey={params.bar1Key} fill="#8884d8" />
+                <Bar dataKey={params.bar2Key} fill="#82ca9d" />
+                <Bar dataKey={params.bar3Key}  />
 
             </BarChart>
           </div>

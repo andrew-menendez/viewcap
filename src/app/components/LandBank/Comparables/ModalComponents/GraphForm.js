@@ -21,10 +21,40 @@ const graphOptions={
                                        {value:'builder',label:'Builder'}
                                        ]},
         xName:{type:'text'},
-        yName:{type:'text'}
-        // bar1Key:{type:'dropdown',values:["CLOS3","CLOS4", "averageSales","closedToDate","last12Months","lastYearClose","lotSQFT","monthAverage","thisYearClosed","totalLots"]},
-        // bar2Key:{type:'dropdown',values:["CLOS3","CLOS4", "averageSales","closedToDate","last12Months","lastYearClose","lotSQFT","monthAverage","thisYearClosed","totalLots"]},
-        // bar3Key:{type:'dropdown',values:["CLOS3","CLOS4", "averageSales","closedToDate","last12Months","lastYearClose","lotSQFT","monthAverage","thisYearClosed","totalLots"]}
+        yName:{type:'text'},
+        bar1Key:{type:'dropdown',options:[{value:"CLOS3",label:"CLOS3"},
+                                          {value:"CLOS4",label:"CLOS4"},
+                                          {value: "averageSales",label:"Average Sales"},
+                                          {value:"closedToDate",label:"Closed to Date"},
+                                          {value:"last12Months",label:"Last 12 Months"},
+                                          {value:"lastYearClose",label:"Last Year Close"},
+                                          {value:"lotSQFT",label:"Lot SQFT"},
+                                          {value:"monthAverage",label:"Month Average"},
+                                          {value:"thisYearClosed",label:"This Year Closed"},
+                                          {value:"totalLots",label:"Total Lots"}
+                                          ]},
+        bar2Key:{type:'dropdown',options:[{value:"CLOS3",label:"CLOS3"},
+                                          {value:"CLOS4",label:"CLOS4"},
+                                          {value: "averageSales",label:"Average Sales"},
+                                          {value:"closedToDate",label:"Closed to Date"},
+                                          {value:"last12Months",label:"Last 12 Months"},
+                                          {value:"lastYearClose",label:"Last Year Close"},
+                                          {value:"lotSQFT",label:"Lot SQFT"},
+                                          {value:"monthAverage",label:"Month Average"},
+                                          {value:"thisYearClosed",label:"This Year Closed"},
+                                          {value:"totalLots",label:"Total Lots"}
+                                          ]},
+        bar3Key:{type:'dropdown',options:[{value:"CLOS3",label:"CLOS3"},
+                                          {value:"CLOS4",label:"CLOS4"},
+                                          {value: "averageSales",label:"Average Sales"},
+                                          {value:"closedToDate",label:"Closed to Date"},
+                                          {value:"last12Months",label:"Last 12 Months"},
+                                          {value:"lastYearClose",label:"Last Year Close"},
+                                          {value:"lotSQFT",label:"Lot SQFT"},
+                                          {value:"monthAverage",label:"Month Average"},
+                                          {value:"thisYearClosed",label:"This Year Closed"},
+                                          {value:"totalLots",label:"Total Lots"}
+                                          ]}
       },
       line:{
         title:{type:'text'},
@@ -57,14 +87,15 @@ export default class GraphForm extends Component {
   }
 
   handleChange(field, value){
-
     let _values=this.state.values;
     _values[field]=value;
     this.setState({values: _values});
   };
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    console.log(this.props.graphType);
+    this.props.addGraph(this.state.values,this.props.graphType, this.props.graphTitle);
+    this.props.closeModal();
     event.preventDefault();
   }
   handleDropdownChange(key,value){
@@ -73,7 +104,7 @@ export default class GraphForm extends Component {
     this.setState({values: _values});
 
   }
-  // add a grid around here? need to sort this out.
+
   buildForm(graphType,graphOptions){
     let schema = graphOptions[graphType];
     let inputFields = Object.keys(schema);
@@ -115,7 +146,7 @@ export default class GraphForm extends Component {
   }
 
   render () {
-    const { className, graphType } = this.props;
+    const { className, graphType, addGraph, temp } = this.props;
 
     return (
       <div className={classnames('GraphForm', className)}>
@@ -127,9 +158,9 @@ export default class GraphForm extends Component {
 
         </Grid>
 
-      <Button>Submit</Button>
+      <Button onClick={this.handleSubmit}>Submit</Button>
       </div>
     );
   }
 }
-
+//onChange={this.handleChange.bind(this,checkFunction,row, index)}
