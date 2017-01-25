@@ -141,10 +141,11 @@ export default class Comparables extends Component {
       let dataArray=Object.values(dataObj);
       let _data=this.processData(dataArray)
       let _widgets=this.state.widgets;
+      let _title= title || graphParams.title;
       let _newWidget={
                       id:graphIndex,
                       type: type,
-                      title: title,
+                      title: _title,
                       data:_data,
                       params:graphParams
                     };
@@ -190,7 +191,7 @@ export default class Comparables extends Component {
               <AddGraphModal selectedRows={this.state.data} addGraph={this.addCustomGraph.bind(this)} panelClose={panelClose} style={{float:'left'}}/>
             </Col>
             <Col>
-              <Button label='Add pre-built Graph' raised icon='add' onClick={this.addGraph.bind(this)} style={{float:'left'}}/>
+              <Button label='Pre-built Graph' raised icon='add' onClick={this.addGraph.bind(this)} style={{float:'left'}}/>
             </Col>
           </Row>
 

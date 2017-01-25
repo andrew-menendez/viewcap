@@ -67,7 +67,7 @@ export default class AddGraphModal extends Component {
 
     return (
       <div className={classnames('AddGraphModal', className)} >
-        <Button onClick={this.openModal}>Open Modal</Button>
+        <Button raised label='Custom Graph' icon='add' onClick={this.openModal}></Button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -88,9 +88,9 @@ export default class AddGraphModal extends Component {
               </Col>
             </Row>
             <div>
-              <GraphForm  addGraph={addGraph} graphTitle='temp' graphType={graphType} closeModal={this.closeModal}/>
+              <GraphForm  addGraph={addGraph} graphType={graphType} closeModal={this.closeModal}/>
             </div>
-            <Button  raised onClick={addGraph}>add graph</Button>
+
         </div>
         </Modal>
       </div>

@@ -133,13 +133,13 @@ export default class GraphForm extends Component {
       <div className={classnames('GraphForm', className)}>
       <p>Enter or select the values for the graph parameters: </p>
 
-        <Grid fluid>
+        <Grid fluid style={{minHeight:'200px'}}>
 
             {this.buildForm(graphType, graphOptions)}
 
         </Grid>
 
-      <Button onClick={this.handleSubmit}>Submit</Button>
+      <Button  label='Add Graph' raised icon='add' onClick={this.handleSubmit} style={{marginTop:'1em'}}></Button>
       </div>
     );
   }
