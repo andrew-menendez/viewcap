@@ -100,7 +100,16 @@ export default class Comparables extends Component {
     }
 
     addGraph(){
-      // need to update the logic here...
+
+      let params={width:600,
+                height:300,
+                xKey:'subdivision',
+                xName:' Sub Division',
+                yName:'',
+                bar1Key:'closedToDate',
+                bar2Key:'averageSales',
+                bar3Key:'thisYearClosed'
+        }
       console.log("add graph data", this.state.data);
       let graphIndex=this.state.graphIndex
       let _data=this.processData(this.state.data.slice(0,10))
@@ -108,9 +117,9 @@ export default class Comparables extends Component {
       let _newWidget={
                       id:graphIndex,
                       type: 'BarChart',
-                      title: 'My Sweet BarChart',
-                      data:_data
-                      // style:{'width':'400px'}
+                      title: 'Subdivision Key Stats',
+                      data:_data,
+                      params:params
                     };
       _widgets.push(_newWidget);
       let _graphIndex=graphIndex + 1;
@@ -176,9 +185,14 @@ export default class Comparables extends Component {
       <div className={classnames('Comparables', className)}>
         <div className="tab-header">
           <h4>Comparables</h4>
-          <Navigation type='horizontal' actions={actions} >
-            <AddGraphModal selectedRows={this.state.data} addGraph={this.addCustomGraph.bind(this)} panelClose={panelClose}/>
-          </Navigation>
+          <Row around ="xs">
+            <Col>
+              <AddGraphModal selectedRows={this.state.data} addGraph={this.addCustomGraph.bind(this)} panelClose={panelClose} style={{float:'left'}}/>
+            </Col>
+            <Col>
+              <Button label='Add pre-built Graph' raised icon='add' onClick={this.addGraph.bind(this)} style={{float:'left'}}/>
+            </Col>
+          </Row>
 
 
         </div>

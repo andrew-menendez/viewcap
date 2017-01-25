@@ -46,7 +46,7 @@ export default class MyBarChart extends Component {
                 <Legend verticalAlign="top"/>
                 <Bar dataKey={params.bar1Key} fill="#8884d8" />
                 <Bar dataKey={params.bar2Key} fill="#82ca9d" />
-                <Bar dataKey={params.bar3Key}  />
+                <Bar dataKey={params.bar3Key} fill="#3333CC" />
 
             </BarChart>
           </div>

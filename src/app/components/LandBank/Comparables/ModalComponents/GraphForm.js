@@ -5,6 +5,17 @@ import Input from 'react-toolbox/lib/input';
 import { Button } from 'react-toolbox/lib/button';
 import {Grid, Row, Col} from 'react-flexbox-grid/lib';
 
+const barKeyOptions={type:'dropdown',options:[{value:"CLOS3",label:"CLOS3"},
+                                          {value:"CLOS4",label:"CLOS4"},
+                                          {value: "averageSales",label:"Average Sales"},
+                                          {value:"closedToDate",label:"Closed to Date"},
+                                          {value:"last12Months",label:"Last 12 Months"},
+                                          {value:"lastYearClose",label:"Last Year Close"},
+                                          {value:"lotSQFT",label:"Lot SQFT"},
+                                          {value:"monthAverage",label:"Month Average"},
+                                          {value:"thisYearClosed",label:"This Year Closed"},
+                                          {value:"totalLots",label:"Total Lots"}
+                                          ]}
 const graphOptions={
       BarChart:{
         title:{type:'text'},
@@ -22,39 +33,9 @@ const graphOptions={
                                        ]},
         xName:{type:'text'},
         yName:{type:'text'},
-        bar1Key:{type:'dropdown',options:[{value:"CLOS3",label:"CLOS3"},
-                                          {value:"CLOS4",label:"CLOS4"},
-                                          {value: "averageSales",label:"Average Sales"},
-                                          {value:"closedToDate",label:"Closed to Date"},
-                                          {value:"last12Months",label:"Last 12 Months"},
-                                          {value:"lastYearClose",label:"Last Year Close"},
-                                          {value:"lotSQFT",label:"Lot SQFT"},
-                                          {value:"monthAverage",label:"Month Average"},
-                                          {value:"thisYearClosed",label:"This Year Closed"},
-                                          {value:"totalLots",label:"Total Lots"}
-                                          ]},
-        bar2Key:{type:'dropdown',options:[{value:"CLOS3",label:"CLOS3"},
-                                          {value:"CLOS4",label:"CLOS4"},
-                                          {value: "averageSales",label:"Average Sales"},
-                                          {value:"closedToDate",label:"Closed to Date"},
-                                          {value:"last12Months",label:"Last 12 Months"},
-                                          {value:"lastYearClose",label:"Last Year Close"},
-                                          {value:"lotSQFT",label:"Lot SQFT"},
-                                          {value:"monthAverage",label:"Month Average"},
-                                          {value:"thisYearClosed",label:"This Year Closed"},
-                                          {value:"totalLots",label:"Total Lots"}
-                                          ]},
-        bar3Key:{type:'dropdown',options:[{value:"CLOS3",label:"CLOS3"},
-                                          {value:"CLOS4",label:"CLOS4"},
-                                          {value: "averageSales",label:"Average Sales"},
-                                          {value:"closedToDate",label:"Closed to Date"},
-                                          {value:"last12Months",label:"Last 12 Months"},
-                                          {value:"lastYearClose",label:"Last Year Close"},
-                                          {value:"lotSQFT",label:"Lot SQFT"},
-                                          {value:"monthAverage",label:"Month Average"},
-                                          {value:"thisYearClosed",label:"This Year Closed"},
-                                          {value:"totalLots",label:"Total Lots"}
-                                          ]}
+        bar1Key:barKeyOptions,
+        bar2Key:barKeyOptions,
+        bar3Key:barKeyOptions
       },
       line:{
         title:{type:'text'},
