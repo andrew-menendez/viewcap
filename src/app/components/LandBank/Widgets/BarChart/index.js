@@ -10,7 +10,7 @@ const CustomizedAxisTick = React.createClass({
 
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-30)">{payload.value}</text>
+        <text  fontSize="10" x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-25)">{payload.value}</text>
       </g>
     );
   }
@@ -40,7 +40,7 @@ export default class MyBarChart extends Component {
 
 
               <CartesianGrid stroke="#ccc" />
-                <XAxis dataKey={params.xKey} name={params.xName} height={60} tick={<CustomizedAxisTick/>} interval={0}/>
+                <XAxis dataKey={params.xKey} name={params.xName} height={80} tick={<CustomizedAxisTick/>} interval={0}/>
                 <YAxis name={params.yName}/>
                 <Tooltip />
                 <Legend verticalAlign="top"/>
