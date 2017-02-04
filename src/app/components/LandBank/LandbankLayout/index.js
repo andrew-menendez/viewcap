@@ -4,6 +4,7 @@ import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
 import LBSidePanel from '../LBSidePanel';
 import LBSummary from '../LBSummary';
 import Comparables from '../Comparables';
+import GraphPlayground from '../GraphPlayground';
 // import ViewCap from '../ViewCap';
 //all sidepanel things...
 import axios from 'axios';
@@ -94,7 +95,8 @@ export default class LandbankLayout extends Component {
         'comparables':<Comparables panelClose={this.closeFunc}/>,
         'simple_residual':<p> simple_residual </p>,
         'quarterly':<p> quarterly </p>,
-        'monthly':<p> monthly </p>
+        'monthly':<p> monthly </p>,
+        'graphs':<GraphPlayground/>
         }
 
     return tabObj[this.state.activeTab]

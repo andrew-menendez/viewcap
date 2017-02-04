@@ -9,6 +9,7 @@ import FaTable from 'react-icons/lib/fa/table';
 import FaCalendar from 'react-icons/lib/fa/calendar';
 import FaCalendarPlusO from 'react-icons/lib/fa/calendar-plus-o';
 import BankIcon from 'react-icons/lib/fa/bank';
+import AreaChart from 'react-icons/lib/fa/area-chart';
 
 export default class SidePanel extends Component {
 
@@ -48,6 +49,10 @@ export default class SidePanel extends Component {
             icon={<FaCalendar/>}
             onClick={ () => tabSet('monthly')}
             active={(activeTab==='monthly') ? true : false }/>
+      <Link label='Graph Playground'
+            icon={<AreaChart/>}
+            onClick={ () => tabSet('graphs')}
+            active={(activeTab==='graphs') ? true : false }/>
 
     </Navigation>
   </div>

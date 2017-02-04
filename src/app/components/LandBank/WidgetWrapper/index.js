@@ -6,6 +6,7 @@ import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox
 import MyBarChart from '../Widgets/BarChart';
 import Responsive from '../Widgets/Responsive';
 import Assumptions from '../Widgets/Assumptions';
+import ModelshopChart from '../Widgets/ModelshopChart';
 
 export default class WidgetWrapper extends Component {
   // static propTypes = {}
@@ -27,7 +28,8 @@ export default class WidgetWrapper extends Component {
         'type1':<Responsive/>,
         'type2':<p> this is a different widget </p>,
         'BarChart':<MyBarChart data={data} params={params}/>,
-        'Assumptions':<Assumptions data={data} params={params}/>
+        'Assumptions':<Assumptions data={data} params={params}/>,
+        'ModelshopChart':<ModelshopChart/>
 
     }
 
