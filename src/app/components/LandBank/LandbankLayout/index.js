@@ -50,12 +50,10 @@ export default class LandbankLayout extends Component {
     // makes sidepanel responsive
   componentWillMount= ()=> {
     var mql = window.matchMedia(`(min-width: 800px)`);
-    console.log("mql is ", mql)
-    console.log(this.state)
     this.setState({mql: mql, drawerPinned: mql.matches});
     // mql.addListener(this.mediaQueryChanged());
     mql.onchange=this.mediaQueryChanged;
-    console.log(this.state);
+
   }
 
   componentWillUnmount= () => {
@@ -63,13 +61,12 @@ export default class LandbankLayout extends Component {
   }
 
   mediaQueryChanged= ()=> {
-    console.log("call me baby");
-    console.log(this.state)
+
     this.setState({drawerPinned: this.state.mql.matches});
   }
 
   closeFunc= ()=> {
-    console.log("clsing")
+
     this.setState({
         drawerPinned:false,
         drawerActive: false
@@ -77,7 +74,6 @@ export default class LandbankLayout extends Component {
   }
 
   pinFunc= ()=> {
-    console.log("pin")
     this.setState({
         drawerPinned:true,
         drawerActive: false
@@ -125,7 +121,7 @@ export default class LandbankLayout extends Component {
 
     render() {
         let style={
-            minHeight:'400px'
+            minHeight:'600px'
         }
         const { reAuthVisible } = this.state;
         return (

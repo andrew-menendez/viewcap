@@ -5,6 +5,7 @@ import {Button} from 'react-toolbox/lib/button';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import MyBarChart from '../Widgets/BarChart';
 import Responsive from '../Widgets/Responsive';
+import Assumptions from '../Widgets/Assumptions';
 
 export default class WidgetWrapper extends Component {
   // static propTypes = {}
@@ -25,7 +26,8 @@ export default class WidgetWrapper extends Component {
     const widgeObj= {
         'type1':<Responsive/>,
         'type2':<p> this is a different widget </p>,
-        'BarChart':<MyBarChart data={data} params={params}/>
+        'BarChart':<MyBarChart data={data} params={params}/>,
+        'Assumptions':<Assumptions data={data} params={params}/>
 
     }
 
@@ -46,7 +48,7 @@ export default class WidgetWrapper extends Component {
         <Col xs>
           <Card style={style}>
 
-          <CardTitle title={widget.title} subtitle="Subtitle here"/>
+          <CardTitle title={widget.title} subtitle={widget.subtitle||'subtitle here'}/>
 
           <div style={widget.style}>
             {this.widgetServer(widget.type, widget.data, widget.params)}

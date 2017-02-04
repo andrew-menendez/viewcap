@@ -16,14 +16,23 @@ export default class LBSummary extends Component {
                 widgets: [
                     {
                       id:1,
-                      type: 'type1',
-                      title: 'Fake 1',
+                      type: 'Assumptions',
+                      title: 'Assumptions',
+                      subtitle:'just a placeholder',
                       style:{'width':'300px'}
                     },
                     {
                       id:2,
+                      type: 'type1',
+                      title: 'Another fake',
+                      subtitle:'just a placeholder',
+                      style:{'width':'300px', 'height':'350px'}
+                    },
+                    {
+                      id:3,
                       type: 'type2',
-                      title: 'Fake 2',
+                      title: 'fake',
+                      subtitle:'just a placeholder',
                       style:{'width':'300px'}
                     }
                   ]

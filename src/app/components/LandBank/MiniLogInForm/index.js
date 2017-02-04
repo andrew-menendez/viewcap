@@ -52,7 +52,7 @@ export default class  MiniLogInForm extends Component {
             <Input label="Username" name="user" type="text" required  value={this.state.user} onChange={this.handleChange.bind(this,'user')}/>
 
 
-            <Input label="Password" name="pass" type="text" required  value={this.state.pass} onChange={this.handleChange.bind(this,'pass')}/>
+            <Input label="Password" name="pass" type="password" required  value={this.state.pass} onChange={this.handleChange.bind(this,'pass')}/>
         </section>
         <Button onClick={() =>logIn({
                                     domain:this.state.domain,
