@@ -4,7 +4,27 @@ import axios from 'axios'
 import Input from 'react-toolbox/lib/input';
 import {Button} from 'react-toolbox/lib/button';
 import {Grid, Row, Col} from 'react-flexbox-grid/lib';
-import MyBarChart from '../BarChart';
+
+import ChartServer from './ChartServer';
+//ultimately move this inside a database? or a config file?
+
+
+const dataConfig= {
+      priceSensitivity:{
+        setName:'Price Sensitivity Chart',
+        chartParams:{
+          BarChart:{
+              width:600,
+              height:400,
+              xKey:'priceChange',
+              xName: 'Price Change',
+              yName:'$',
+              bar1Key:'finishedLotValue',
+              bar2Key:'paperLotValue'
+            }
+        }//end chart Params
+      }
+    };
 
 
 export default class ModelshopChart extends Component {
@@ -15,11 +35,14 @@ export default class ModelshopChart extends Component {
               data:[],
               loading:false,
               dataset:null,
-              graphtype:'bar'
+              chartParams:{},
+              chartType:'BarChart'
               }
 
       this.fetchData=this.fetchData.bind(this)
       //this.handleChange = this.handleChange.bind(this);
+      this.processData=this.processData.bind(this);
+
     }
 
   handleChange(name, value){
@@ -38,33 +61,58 @@ export default class ModelshopChart extends Component {
           })
       .then((res)=>{
 
+        let processedData=this.processData(res.data.chartPoints);
+
         this.setState({
-          data:res.data.chartPoints,
+          data:processedData,
           loading:false
         })
+        // return processedData;
         console.log(res);
         console.log(res.data.chartPoints);
         console.log(this.state);
       })
 
     }
+  processData(records){
+      let _records=records;
+      _records.forEach(function(record){
+        let keys=Object.keys(record);
+          keys.forEach((key)=>{
+            record[key]=Number(record[key]);
+          })
+       })
+      return _records;
+    }
+
+  setParams(dataset,type){
+    console.log("set params ",dataConfig[dataset].chartParams[type]);
+    this.setState({
+      chartParams:dataConfig[dataset].chartParams[type]
+    })
+  }
 
   componentDidMount() {
         this.fetchData('Price Sensitivity Chart');
+        this.setParams('priceSensitivity','BarChart')
     }
 
-  render(){
-    const { className, data, params } = this.props;
+  //createComp()
 
+
+//
+  render(){
+    const { className } = this.props;
+    const { data, chartParams} = this.state;
+    const type='BarChart';
+
+    // instead create graphServer
 
     return (
           <div className={classnames('ModelshopChart', className)}>
-           <Button label="edit" icon="gear"/>
+
             <p> here we want to wrap around a graph</p>
-
-
-
-
+            <ChartServer type={type} data={data} params={chartParams}/>
           </div>
         )
     }

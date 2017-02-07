@@ -14,7 +14,7 @@ export default class GraphPlayground extends Component {
                       type: 'ModelshopChart',
                       title: 'Projections',
                       subtitle:'just a placeholder',
-                      style:{'width':'300px', 'height':'350px'}
+                      style:{'minWidth':'300px', 'minHeight':'350px'}
                     }]
               }
 

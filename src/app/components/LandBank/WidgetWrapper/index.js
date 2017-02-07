@@ -29,7 +29,7 @@ export default class WidgetWrapper extends Component {
         'type2':<p> this is a different widget </p>,
         'BarChart':<MyBarChart data={data} params={params}/>,
         'Assumptions':<Assumptions data={data} params={params}/>,
-        'ModelshopChart':<ModelshopChart/>
+        'ModelshopChart':<ModelshopChart />
 
     }
 
