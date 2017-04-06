@@ -2,6 +2,11 @@ import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
 import axios from 'axios';
 import Model from '../Model';
+import {Button} from 'react-toolbox/lib/button';
+import RefeshIcon from 'react-icons/lib/md/cached';
+
+//react-icons/lib/md/cached
+
 // import './style.css';
 
 
@@ -16,13 +21,16 @@ class ModelSelect extends Component {
             loading:false,
             models: []
         }
+      this.key= this.props.user + '_models';
 
       this.processResponse = this.processResponse.bind(this);
+      this.getModels = this.getModels.bind(this);
+
     }
 
   processResponse(response){
     let _this=this;
-    if(response.data.errors.length > 0){
+    if(response.data.errors && response.data.errors.length > 0){
       console.log("there was an errrrrror?")
       console.error(response.data.errors)
     } else {
@@ -30,25 +38,58 @@ class ModelSelect extends Component {
       _this.setState({
         models:response.data.modelInfo
       })
+      console.log(response.data.modelInfo)
+      if(response.data.modelInfo){
+        localStorage.setItem(this.key, JSON.stringify(response.data.modelInfo));
+      }
     }
   }
 
   componentDidMount() {
-    let _this=this;
-        _this.setState({loading: true})
-        axios.get('api/models', {
-          params:{
-            user:'viewcap'
-          }
-        })
-        .then(function (response) {
-          _this.setState({loading: false})
-          _this.processResponse(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    // let _this=this;
+        this.setState({loading: true})
+        console.log(this.modelCheck());
+        if(this.modelCheck()){
+          return
+        } else {
+          this.getModels();
+        }
+
   }
+
+  getModels(){
+    let _this=this;
+    return axios.get('api/models', {
+              params:{
+                user:this.props.user
+              }
+          })
+          .then(function (response) {
+            _this.setState({loading: false})
+            _this.processResponse(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+  }
+
+  modelCheck(){
+    let _models=JSON.parse(localStorage.getItem(this.key));
+    console.log(_models);
+
+    if(_models){
+      this.setState({models:_models})
+    }
+    return (_models) ? true : false;
+
+  }
+
+  // addRandomIcons(models){
+
+  //   models.forEach((model)=>{
+  //     model.icon=
+  //   })
+  // }
 
   render() {
     const { className} = this.props;
@@ -56,6 +97,7 @@ class ModelSelect extends Component {
 
     return (
       <div className={classnames('ModelSelect', className)} >
+      <Button icon={<RefeshIcon/>} onClick={this.getModels}> refresh model list </Button>
         {(models) ? models.map((model,i)=> <Model key={i} modelobj={model}/>)
           : <span>no models found</span>
         }
@@ -64,5 +106,9 @@ class ModelSelect extends Component {
     );
   }
 }
+
+ModelSelect.propTypes={
+    user:PropTypes.string.isRequired
+  };
 
 export default ModelSelect;

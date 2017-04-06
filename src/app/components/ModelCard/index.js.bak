@@ -4,8 +4,7 @@ import classnames from 'classnames';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
 
-import theme from './theme.css';
-import ModelIcon from '../ModelIcon';
+import theme from './theme.scss';
 
 //console.log(cardTheme)
 
@@ -19,33 +18,28 @@ export default class ModelCard extends Component {
     return loadPath.toLowerCase();
   }
 
-  getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   render() {
     const { className, modelobj } = this.props;
+    console.log(theme)
     var style={
       width:'350px',
       margin:'10px',
       borderRadius:'5px'
     }
-
     return (
       <div className={classnames('ModelCard', className)}>
-
         <Card style={style}>
-        <Link to={this.getUrl(modelobj.loadPath)} className="modelTitleLink">
+        <Link to={this.getUrl(modelobj.loadPath)}>
             <CardTitle
-
+              className={theme.themedCardTitle}
               title={modelobj.name}
               subtitle="Subtitle here"
-              style={theme}
+              theme={theme}
             />
         </Link>
           <CardMedia
-
-            children={<ModelIcon x={this.getRandomInt(1,6)}/>}
+            aspectRatio="wide"
+            image="https://placeimg.com/800/450/nature"
           />
           <CardText>{dummyText}
 
